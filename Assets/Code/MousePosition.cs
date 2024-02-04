@@ -24,24 +24,31 @@ public class MousePosition : MonoBehaviour
         // This is used as the point where the player is right on top of the ground.
         RaycastHit2D hitGround = Physics2D.Raycast(telepoint.position, -Vector2.up);
         RaycastHit2D hitCieling = Physics2D.Raycast(telepoint.position, -Vector2.down);
-        // Shoots raycasts up and down to tell the distance between the telepoint and ground/platform
+        
+        RaycastHit2D hitLeft = Physics2D.Raycast(new Vector2(telepoint.position.x, telepoint.position.y - hitGround.distance + offsetPosition), Vector2.left);
+        RaycastHit2D hitRight = Physics2D.Raycast(new Vector2(telepoint.position.x, telepoint.position.y - hitGround.distance + offsetPosition), Vector2.right);
+        // Shoots raycasts in all directions to tell the distance between the telepoint and ground/platform
         // Note: Raycasts do not exist when starting inside of an object.
-        Debug.DrawRay(telepoint.transform.position, -Vector2.up * hitGround.distance, Color.red);
-        Debug.DrawRay(telepoint.transform.position, -Vector2.down * hitCieling.distance, Color.red);
+        Debug.DrawRay(telepoint.position, -Vector2.up * hitGround.distance, Color.red);
+        Debug.DrawRay(telepoint.position, -Vector2.down * hitCieling.distance, Color.red);        
+        Debug.DrawRay(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z), Vector2.left * hitLeft.distance, Color.red);
+        Debug.DrawRay(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z), Vector2.right * hitRight.distance, Color.red);
         // Shows the "Scene" window the rays.
 
-        if (hitGround.collider != null) // If there is ground under the telepoint
+        if (Input.GetMouseButtonDown(0)) // Upon a left click...
         {
-            if (hitCieling.collider != null) // If there is cieling above the telepoint
+            if (hitGround.collider != null) // If there is ground under the telepoint
             {
-                if (hitGround.distance + hitCieling.distance >= playerHitbox.size.y)
-                // if the distance between the cieling and ground is big enough to fit the player
+                if (hitCieling.collider != null) // If there is cieling above the telepoint
                 {
-                    if (Input.GetMouseButtonDown(0)) // Left Click
+                    if (hitGround.distance + hitCieling.distance >= playerHitbox.size.y)
+                    // if the distance between the cieling and ground is big enough to fit the player
                     {
-                        playerPosition.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
+                        if (hitLeft.distance > playerHitbox.size.x && hitRight.distance > playerHitbox.size.x) playerPosition.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
+                        Debug.Log(hitLeft.distance + hitRight.distance + .3 + " compared to " + playerHitbox.size.x);
                         /**
-                            Moves the player to:
+                            If the size of the hitbox (plus a little wiggle room) can fit in the space you're teleporting to,
+                            Move the player to:
                             X: The same X as the telepoint
                             Y: The offsetPosition distance to stand on the ground
                             Z: Doesn't matter*, but set to the same as the telepoint
@@ -50,13 +57,11 @@ public class MousePosition : MonoBehaviour
                         */
                     }
                 }
-            }
-            else
-            {
-                if (Input.GetMouseButtonDown(0))
+                else
                 {
-                    playerPosition.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
-                    // Same as above
+                    if (hitLeft.distance > playerHitbox.size.x && hitRight.distance > playerHitbox.size.x) playerPosition.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
+                    Debug.Log(hitLeft.distance + hitRight.distance + .3 + " compared to " + playerHitbox.size.x);
+                    // Same as above                }
                 }
             }
         }
