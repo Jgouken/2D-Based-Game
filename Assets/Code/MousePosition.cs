@@ -24,15 +24,15 @@ public class MousePosition : MonoBehaviour
 
     void Update() // Is called once per frame
     {
-        var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // Grabs the position of the mouse (relative to screen) and sets the telepoint object relative to the world
-        mouseWorldPos.z = 0f;
-        // The z axis doesn't quite matter in a 2D space
-        telepoint.position = mouseWorldPos;
-        // Sets the position of the telepoint to the world position of the mouse
-
         if (Input.GetKey(KeyCode.LeftControl))
         {
+            var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // Grabs the position of the mouse (relative to screen) and sets the telepoint object relative to the world
+            mouseWorldPos.z = 0f;
+            // The z axis doesn't quite matter in a 2D space
+            telepoint.position = mouseWorldPos;
+            // Sets the position of the telepoint to the world position of the mouse
+
             var offsetPosition = player.transform.position.y - groundCheck.position.y;
             // This is the distance between the player's position and what's considered their feet (used as the check to see if they're touching the ground).
             // This is used as the point where the player is right on top of the ground.
@@ -50,7 +50,8 @@ public class MousePosition : MonoBehaviour
 
             playerCopy.transform.localScale = player.transform.localScale;
 
-            if (hitGround.collider != null) // If there is ground under the telepoint
+            if (hitGround.collider != null && telepoint.position.y < (telepoint.position.y - hitGround.distance) + (playerHitbox.size.y))
+            // If there is ground under the telepoint and your mouse is close enough to the ground
             {
                 if (hitCieling.collider != null) // If there is cieling above the telepoint
                 {
@@ -60,8 +61,7 @@ public class MousePosition : MonoBehaviour
                         if (hitLeft.distance > playerHitbox.size.x && hitRight.distance > playerHitbox.size.x)
                         {
                             if (Input.GetMouseButtonDown(0)) player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
-                            playerCopy.SetActive(true);
-                            playerCopy.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
+                            if (telepoint.position.y < (telepoint.position.y - hitGround.distance) + (playerHitbox.size.y * 3)) ActivateCopy(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z));
                         }
                         else playerCopy.SetActive(false);
                         /**
@@ -81,8 +81,7 @@ public class MousePosition : MonoBehaviour
                     if (hitLeft.distance > playerHitbox.size.x && hitRight.distance > playerHitbox.size.x)
                     {
                         if (Input.GetMouseButtonDown(0)) player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
-                        playerCopy.SetActive(true);
-                        playerCopy.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
+                        ActivateCopy(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z));
                     }
                     else playerCopy.SetActive(false);
                     // Same as above
@@ -91,5 +90,11 @@ public class MousePosition : MonoBehaviour
             else playerCopy.SetActive(false);
         }
         else playerCopy.SetActive(false);
+    }
+
+    void ActivateCopy(Vector3 newPosition)
+    {
+        playerCopy.SetActive(true);
+        playerCopy.transform.position = newPosition;
     }
 }

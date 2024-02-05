@@ -9,9 +9,9 @@ public class PlayerMovement : MonoBehaviour
     // Used for the horizontal input
     public float speed = 8f;
     // The speed (world units per second) that the player travels
-    public float jumpingPower = 31f;
+    public float jumpingPower = 40f;
     // The POWER (world units per second) of dem legs
-    private bool isFacingRight = false;
+    private bool isFacingRight = true;
     // The direction of the character
     public char playerClass = 'W';
     // The type of character (currently unused)
