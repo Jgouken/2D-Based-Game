@@ -16,9 +16,8 @@ public class PlayerMovement : MonoBehaviour
     public char playerClass = 'W';
     // The type of character (currently unused)
 
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D playerRigidbody;
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform mousePosition;
     [SerializeField] private LayerMask groundLayer;
     // Gets other objects' components used and such
     void Update() // Is called once per frame
@@ -28,13 +27,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer))
         // If the "Jump" button is pressed and the groundCheck object is within anything on the groundLayer layer
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpingPower);
             // Does not change the x velocity, then sets the y velocity to the jumpingPower variable
         }
 
-        if (Input.GetButtonDown("Jump") && rb.velocity.y > 0f)
+        if (Input.GetButtonDown("Jump") && playerRigidbody.velocity.y > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y * 0.5f);
             // Does not change the x velocity, then multiplies the current y velocity by 50%, allowing for longer presses to get higher jumps
         }
 
@@ -77,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()  // Is called exactly 50 times per second, regardless of framerate
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        playerRigidbody.velocity = new Vector2(horizontal * speed, playerRigidbody.velocity.y);
         // The horizontal velocity is multiplied by the speed.
         // This is separate from framerate so that, if the game changes in framerate, there's not an exponential increase of speed.
         // Fun Fact, you'll find that mistake abused in Super Mario 64 speedruns.
