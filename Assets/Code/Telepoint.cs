@@ -8,11 +8,10 @@ public class MousePosition : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerCopy;
-    [SerializeField] private BoxCollider2D playerHitbox;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform telepoint;
+    [SerializeField] private Cooldown cooldown;
     // Gets other objects' components used and such
-
 
     void Start()
     {
@@ -24,9 +23,10 @@ public class MousePosition : MonoBehaviour
 
     void Update() // Is called once per frame
     {
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftControl) && !cooldown.IsCoolingDown)
         {
             var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var playerHitbox = player.GetComponent<BoxCollider2D>();
             // Grabs the position of the mouse (relative to screen) and sets the telepoint object relative to the world
             mouseWorldPos.z = 0f;
             // The z axis doesn't quite matter in a 2D space
@@ -60,7 +60,11 @@ public class MousePosition : MonoBehaviour
                     {
                         if (hitLeft.distance > playerHitbox.size.x && hitRight.distance > playerHitbox.size.x)
                         {
-                            if (Input.GetMouseButtonDown(0)) player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
+                            if (Input.GetMouseButtonDown(0))
+                            {
+                                player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
+                                cooldown.StartCooldown();
+                            }
                             if (telepoint.position.y < (telepoint.position.y - hitGround.distance) + (playerHitbox.size.y * 3)) ActivateCopy(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z));
                         }
                         else playerCopy.SetActive(false);
@@ -80,7 +84,11 @@ public class MousePosition : MonoBehaviour
                 {
                     if (hitLeft.distance > playerHitbox.size.x && hitRight.distance > playerHitbox.size.x)
                     {
-                        if (Input.GetMouseButtonDown(0)) player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
+                            cooldown.StartCooldown();
+                        }
                         ActivateCopy(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z));
                     }
                     else playerCopy.SetActive(false);
