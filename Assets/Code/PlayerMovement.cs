@@ -18,17 +18,21 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Rigidbody2D playerRigidbody;
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask[] groundLayers;
     // Gets other objects' components used and such
     void Update() // Is called once per frame
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         // Gets the horizontal input from the player which is set in Unity in the [Edit -> Settings -> Input] settings
-        if (Input.GetButtonDown("Jump") && Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer))
-        // If the "Jump" button is pressed and the groundCheck object is within anything on the groundLayer layer
+        for (int i = 0; i < groundLayers.Length; i++)
         {
-            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpingPower);
-            // Does not change the x velocity, then sets the y velocity to the jumpingPower variable
+            if (Input.GetButtonDown("Jump") && Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayers[i]))
+            // If the "Jump" button is pressed and the groundCheck object is within anything on the groundLayer layer
+            {
+                playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpingPower);
+                // Does not change the x velocity, then sets the y velocity to the jumpingPower variable
+                i = groundLayers.Length;
+            }
         }
 
         if (Input.GetButtonDown("Jump") && playerRigidbody.velocity.y > 0f)
