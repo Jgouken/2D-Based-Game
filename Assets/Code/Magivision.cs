@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,7 @@ public class Magivision : MonoBehaviour
             magivision.GetComponent<SpriteRenderer>().enabled = true;
             if (visionSize < playerCollider.size.y * 8)
             {
-                visionSize += playerCollider.size.y / 15;
+                visionSize += playerCollider.size.y / (5 * (visionSize + 1 / playerCollider.size.y));
                 magivision.transform.localScale = new Vector3(visionSize, visionSize);
             }
         } else if (visionSize <= 0) magivision.GetComponent<SpriteRenderer>().enabled = false;
