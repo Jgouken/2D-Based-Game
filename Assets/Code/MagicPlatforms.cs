@@ -17,7 +17,7 @@ public class MagicPlatforms : MonoBehaviour
 
     void Update()
     {
-        if (!Input.GetKey(KeyCode.LeftShift) && magivision.visionSize < 0) {
+        if (!Input.GetKey(KeyCode.LeftShift) && magivision.visionSize < 6) {
             magicPlatform.GetComponent<BoxCollider2D>().enabled = false;
         } else {
             magicPlatform.GetComponent<BoxCollider2D>().enabled = true;

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Magivision : MonoBehaviour
 {
+    [SerializeField] private GameObject player;
     [SerializeField] private GameObject magivision;
-    [SerializeField] private BoxCollider2D playerCollider;
     public float visionSize;
 
     // Start is called before the first frame update
@@ -20,17 +20,17 @@ public class Magivision : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            magivision.GetComponent<SpriteMask>().enabled = true;
-            if (visionSize < playerCollider.size.y * 8)
+            if (player.GetComponent<Transform>()) magivision.GetComponent<SpriteMask>().enabled = true;
+            if (visionSize < player.GetComponent<BoxCollider2D>().size.y * 8)
             {
-                visionSize += playerCollider.size.y / (5 * (visionSize + 1 / playerCollider.size.y));
+                visionSize += player.GetComponent<BoxCollider2D>().size.y * 2 / (2 * (visionSize + 1 / player.GetComponent<BoxCollider2D>().size.y * 4));
                 magivision.transform.localScale = new Vector3(visionSize, visionSize);
             }
         } else if (visionSize <= 0) magivision.GetComponent<SpriteMask>().enabled = false;
 
         if (visionSize > 0 && !Input.GetKey(KeyCode.LeftShift))
         {
-            visionSize -= playerCollider.size.y / 15;
+            visionSize -= player.GetComponent<BoxCollider2D>().size.y * 2 / (2 * (visionSize + 1 / player.GetComponent<BoxCollider2D>().size.y * 4));
             magivision.transform.localScale = new Vector3(visionSize, visionSize);
         }
     }

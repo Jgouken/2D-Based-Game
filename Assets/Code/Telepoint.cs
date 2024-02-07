@@ -11,6 +11,7 @@ public class MousePosition : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform telepoint;
     [SerializeField] private Cooldown cooldown;
+    [SerializeField] private Magivision magivision;
     // Gets other objects' components used and such
 
     void Start()
@@ -18,12 +19,13 @@ public class MousePosition : MonoBehaviour
         var playCopRender = playerCopy.AddComponent<SpriteRenderer>();
         playCopRender.sprite = player.GetComponent<SpriteRenderer>().sprite;
         playerCopy.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .5f);
+        playerCopy.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
         playerCopy.SetActive(false);
     }
 
     void Update() // Is called once per frame
     {
-        if (Input.GetKey(KeyCode.LeftControl) && !cooldown.IsCoolingDown)
+        if (Input.GetKey(KeyCode.LeftShift) && !cooldown.IsCoolingDown)
         {
             var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var playerHitbox = player.GetComponent<BoxCollider2D>();
@@ -53,10 +55,36 @@ public class MousePosition : MonoBehaviour
             if (hitGround.collider != null && telepoint.position.y < (telepoint.position.y - hitGround.distance) + (playerHitbox.size.y))
             // If there is ground under the telepoint and your mouse is close enough to the ground
             {
-                if (hitCieling.collider != null) // If there is cieling above the telepoint
+                if (Vector3.Distance(new Vector3(telepoint.position.x, telepoint.position.y - hitGround.distance), new Vector3(player.transform.position.x, player.transform.position.y + (float)0.743)) <= (magivision.visionSize / 2) - playerHitbox.size.x)
                 {
-                    if (hitGround.distance + hitCieling.distance >= playerHitbox.size.y)
-                    // if the distance between the cieling and ground is big enough to fit the player
+                    if (hitCieling.collider != null) // If there is cieling above the telepoint
+                    {
+                        if (hitGround.distance + hitCieling.distance >= playerHitbox.size.y)
+                        // if the distance between the cieling and ground is big enough to fit the player
+                        {
+                            if (hitLeft.distance > playerHitbox.size.x && hitRight.distance > playerHitbox.size.x)
+                            {
+                                if (Input.GetMouseButtonDown(0))
+                                {
+                                    player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition);
+                                    cooldown.StartCooldown();
+                                }
+                                if (telepoint.position.y < (telepoint.position.y - hitGround.distance) + (playerHitbox.size.y * 3)) ActivateCopy(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z));
+                            }
+                            else playerCopy.SetActive(false);
+                            /**
+                                If the size of the hitbox (plus a little wiggle room) can fit in the space you're teleporting to,
+                                Move the player to:
+                                X: The same X as the telepoint
+                                Y: The offsetPosition distance to stand on the ground
+                                Z: Doesn't matter*, but set to the same as the telepoint
+
+                                * It does matter actually, but its useless for now.
+                            */
+                        }
+                        else playerCopy.SetActive(false);
+                    }
+                    else
                     {
                         if (hitLeft.distance > playerHitbox.size.x && hitRight.distance > playerHitbox.size.x)
                         {
@@ -65,35 +93,13 @@ public class MousePosition : MonoBehaviour
                                 player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
                                 cooldown.StartCooldown();
                             }
-                            if (telepoint.position.y < (telepoint.position.y - hitGround.distance) + (playerHitbox.size.y * 3)) ActivateCopy(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z));
+                            ActivateCopy(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z));
                         }
                         else playerCopy.SetActive(false);
-                        /**
-                            If the size of the hitbox (plus a little wiggle room) can fit in the space you're teleporting to,
-                            Move the player to:
-                            X: The same X as the telepoint
-                            Y: The offsetPosition distance to stand on the ground
-                            Z: Doesn't matter*, but set to the same as the telepoint
-
-                            * It does matter actually, but its useless for now.
-                        */
+                        // Same as above
                     }
-                    else playerCopy.SetActive(false);
                 }
-                else
-                {
-                    if (hitLeft.distance > playerHitbox.size.x && hitRight.distance > playerHitbox.size.x)
-                    {
-                        if (Input.GetMouseButtonDown(0))
-                        {
-                            player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
-                            cooldown.StartCooldown();
-                        }
-                        ActivateCopy(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z));
-                    }
-                    else playerCopy.SetActive(false);
-                    // Same as above
-                }
+                else playerCopy.SetActive(false);
             }
             else playerCopy.SetActive(false);
         }
