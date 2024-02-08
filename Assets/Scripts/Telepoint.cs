@@ -25,7 +25,7 @@ public class MousePosition : MonoBehaviour
 
     void Update() // Is called once per frame
     {
-        if (Input.GetKey(KeyCode.LeftShift) && !cooldown.IsCoolingDown)
+        if (Input.GetKey(KeyCode.LeftShift) && !cooldown.IsCoolingDown) // If Left Shift is pressed and the cooldown is over
         {
             var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var playerHitbox = player.GetComponent<BoxCollider2D>();
@@ -56,6 +56,7 @@ public class MousePosition : MonoBehaviour
             // If there is ground under the telepoint and your mouse is close enough to the ground
             {
                 if (Vector3.Distance(new Vector3(telepoint.position.x, telepoint.position.y - hitGround.distance), new Vector3(player.transform.position.x, player.transform.position.y + (float)0.743)) <= (magivision.visionSize / 2) - playerHitbox.size.x)
+                // If the telepoint is within the magivision circle
                 {
                     if (hitCieling.collider != null) // If there is cieling above the telepoint
                     {
@@ -63,37 +64,32 @@ public class MousePosition : MonoBehaviour
                         // if the distance between the cieling and ground is big enough to fit the player
                         {
                             if (hitLeft.distance > playerHitbox.size.x && hitRight.distance > playerHitbox.size.x)
+                            // If the player is not too close to nearby walls
                             {
-                                if (Input.GetMouseButtonDown(0))
+                                if (Input.GetMouseButtonDown(0)) // Left Click
                                 {
-                                    player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition);
-                                    cooldown.StartCooldown();
+                                    player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition); // Move Player
+                                    cooldown.StartCooldown(); // Start the cooldown before teleporting again
                                 }
                                 if (telepoint.position.y < (telepoint.position.y - hitGround.distance) + (playerHitbox.size.y * 3)) ActivateCopy(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z));
+                                // Shows the ghost player on the ground if there's enough vertical space
                             }
                             else playerCopy.SetActive(false);
-                            /**
-                                If the size of the hitbox (plus a little wiggle room) can fit in the space you're teleporting to,
-                                Move the player to:
-                                X: The same X as the telepoint
-                                Y: The offsetPosition distance to stand on the ground
-                                Z: Doesn't matter*, but set to the same as the telepoint
-
-                                * It does matter actually, but its useless for now.
-                            */
                         }
                         else playerCopy.SetActive(false);
                     }
                     else
                     {
                         if (hitLeft.distance > playerHitbox.size.x && hitRight.distance > playerHitbox.size.x)
+                        // If the player is not too close to any nearby wall
                         {
-                            if (Input.GetMouseButtonDown(0))
+                            if (Input.GetMouseButtonDown(0)) // Left Click
                             {
-                                player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z);
-                                cooldown.StartCooldown();
+                                player.transform.position = new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z); // Move Player
+                                cooldown.StartCooldown(); // Start the coooldown before teleporting again
                             }
                             ActivateCopy(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z));
+                            // Shows the ghost player on the ground
                         }
                         else playerCopy.SetActive(false);
                         // Same as above

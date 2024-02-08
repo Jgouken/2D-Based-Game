@@ -3,7 +3,12 @@ guid: c0465f023990a914ea4a19646b132cc4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {instanceID: 0}
+  - playerCopy: {instanceID: 0}
+  - groundCheck: {instanceID: 0}
+  - telepoint: {instanceID: 0}
+  - magivision: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

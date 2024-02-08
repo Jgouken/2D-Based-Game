@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3481157551778671237}
   - component: {fileID: 3196235215141220440}
   - component: {fileID: 2731229101453044702}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4841,7 +4841,7 @@ GameObject:
   - component: {fileID: 7396537584454031005}
   - component: {fileID: 7522226415219680788}
   - component: {fileID: 4605519384047796132}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Magic Platform
   m_TagString: Magic Platform
   m_Icon: {fileID: 0}
