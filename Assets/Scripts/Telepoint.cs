@@ -4,14 +4,16 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
+// This script should only be applied to the Wizard's "Telepoint" object.
+
 public class MousePosition : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerCopy;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform telepoint;
-    [SerializeField] private Cooldown cooldown;
     [SerializeField] private Magivision magivision;
+    [SerializeField] private Cooldown cooldown;
     // Gets other objects' components used and such
 
     void Start()

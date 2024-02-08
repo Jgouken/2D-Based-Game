@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This script should only be applied to the Wizard's "player" object.
+
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -13,8 +15,6 @@ public class PlayerMovement : MonoBehaviour
     // The POWER (world units per second) of dem legs
     private bool isFacingRight = true;
     // The direction of the character
-    public char playerClass = 'W';
-    // The type of character (currently unused)
 
     [SerializeField] private Rigidbody2D playerRigidbody;
     [SerializeField] private Transform groundCheck;
@@ -51,30 +51,6 @@ public class PlayerMovement : MonoBehaviour
             // Flips the horizontal (x) scale of the player
             transform.localScale = localScale;
             // Applies it to the player
-        }
-
-        switch (playerClass)
-        {
-            case 'W':
-                {
-                    // I AM A WIZARD
-                    break;
-                }
-            case 'R':
-                {
-                    // I AM A ROGUE
-                    break;
-                }
-            case 'B':
-                {
-                    // I AM A BARD
-                    break;
-                }
-            default:
-                {
-                    // I AM AN ERROR
-                    break;
-                }
         }
     }
 

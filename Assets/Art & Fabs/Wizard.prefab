@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6179828663333154518}
   - component: {fileID: 2478042493531395420}
-  - component: {fileID: 5702504185405638769}
+  - component: {fileID: 5511697581923021721}
   m_Layer: 0
   m_Name: Telepoint
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5702504185405638769
+--- !u!114 &5511697581923021721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,9 +101,9 @@ MonoBehaviour:
   playerCopy: {fileID: 2051410350404352260}
   groundCheck: {fileID: 5522470282881395274}
   telepoint: {fileID: 6179828663333154518}
+  magivision: {fileID: 8656694651799538935}
   cooldown:
     cooldownTime: 2
-  magivision: {fileID: 8656694651799538935}
 --- !u!1 &2051410350404352260
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +310,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   jumpingPower: 40
-  playerClass: 82
   playerRigidbody: {fileID: 8938133045821847539}
   groundCheck: {fileID: 5522470282881395274}
   groundLayers:
@@ -348,8 +347,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5446438076616510929}
-  - {fileID: 1915130516136315308}
   - {fileID: 6179828663333154518}
+  - {fileID: 1915130516136315308}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4473310977453021875
@@ -362,8 +361,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8209343724540127059}
   - component: {fileID: 1728491472699423524}
-  - component: {fileID: 8656694651799538935}
   - component: {fileID: 8281540584628873832}
+  - component: {fileID: 8656694651799538935}
   m_Layer: 0
   m_Name: Magivision
   m_TagString: Untagged
@@ -437,22 +436,6 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
---- !u!114 &8656694651799538935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4473310977453021875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19a1e5b1110176247b2a98c9c6d3c90e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 4099614202210200788}
-  magivision: {fileID: 4473310977453021875}
-  magiforms: []
-  visionSize: 0
 --- !u!212 &8281540584628873832
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -505,6 +488,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8656694651799538935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4473310977453021875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a1e5b1110176247b2a98c9c6d3c90e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 4099614202210200788}
+  magivision: {fileID: 4473310977453021875}
+  magiforms: []
+  visionSize: 0
+  maximumVisionSize: 0
 --- !u!1 &5906763834787925422
 GameObject:
   m_ObjectHideFlags: 0
