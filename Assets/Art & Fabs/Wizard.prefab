@@ -310,7 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   jumpingPower: 40
-  playerClass: 87
+  playerClass: 82
   playerRigidbody: {fileID: 8938133045821847539}
   groundCheck: {fileID: 5522470282881395274}
   groundLayers:
@@ -451,6 +451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 4099614202210200788}
   magivision: {fileID: 4473310977453021875}
+  magiforms: []
   visionSize: 0
 --- !u!212 &8281540584628873832
 SpriteRenderer:

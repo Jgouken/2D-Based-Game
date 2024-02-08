@@ -7,17 +7,34 @@ public class Magivision : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject magivision;
+    [HideInInspector] public GameObject[] magiforms;
     public float visionSize;
 
     // Start is called before the first frame update
     void Start()
     {
         visionSize = 0;
+        magiforms = GameObject.FindGameObjectsWithTag("Magic Platform");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!Input.GetKey(KeyCode.LeftShift) && visionSize < 6)
+        {
+            foreach (GameObject magicPlatform in magiforms)
+            {
+                magicPlatform.GetComponent<BoxCollider2D>().enabled = false;
+            }
+        }
+        else
+        {
+            foreach (GameObject magicPlatform in magiforms)
+            {
+                magicPlatform.GetComponent<BoxCollider2D>().enabled = true;
+            }
+        }
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             if (player.GetComponent<Transform>()) magivision.GetComponent<SpriteMask>().enabled = true;
