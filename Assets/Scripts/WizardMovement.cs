@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,28 +13,34 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask[] groundLayers;
     // Gets other objects' components used and such
 
-    void Start()
-    {
-        var float horizontal;
-        // Used for the horizontal input
-        var float speed = 8f;
-        // The speed (world units per second) that the player travels
-        var float jumpingPower = 40f;
-        // The POWER (world units per second) of dem legs
-        var bool isFacingRight = true;
-        // The direction of the character
-        var Vector2 platformSpeed = new Vector2(0, 0);
-        // Ha
-        var Transform platformLastPos;
-    }
+    public GameObject currentGround;
+    public Vector2 groundSpeed;
+
+    public float lastGroundPosX;
+    public float lastGroundPosY;
+    private float horizontal;
+    // Used for the horizontal input
+    private float speed = 8f;
+    // The speed (world unit per second) that the player travels
+    private float jumpingPower = 40f;
+    // The POWER (world units per second) of dem legs
+    private bool isFacingRight = true;
+    // The direction of the character
 
     void Update() // Is called once per frame
     {
-        if (transform.parent != wizard.transform)
+        if (currentGround)
         {
-            platformSpeed = new Vector2((transform.parent.transform.position.x - platformLastPos.position.x) / (1.0f / Time.deltaTime), (transform.parent.transform.position.y - platformLastPos.position.y) / (1.0f / Time.deltaTime));
-            //if (platformLastPos) platformSpeed = new Vector2((transform.parent.transform.position.x - platformLastPos.x) / 50, 0);
-            platformLastPos = transform.parent;
+            //if (lastGroundPos) groundSpeed = new Vector2(Math.Abs(lastGroundPos.position.x - currentGround.transform.position.x), Math.Abs(lastGroundPos.position.y - currentGround.transform.position.y));
+            if (lastGroundPosX != 0 && lastGroundPosY != 0) groundSpeed = new Vector2(-(lastGroundPosX - currentGround.transform.position.x) / Time.deltaTime, -(lastGroundPosY - currentGround.transform.position.y) / Time.deltaTime);
+            lastGroundPosX = currentGround.transform.position.x;
+            lastGroundPosY = currentGround.transform.position.y;
+        }
+        else
+        {
+            lastGroundPosX = 0;
+            lastGroundPosY = 0;
+            groundSpeed = new Vector2(0, 0);
         }
 
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -45,15 +52,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 // Does not change the x velocity, then sets the y velocity to the jumpingPower variable
                 i = groundLayers.Length;
-                if (transform.parent != wizard)
-                {
-                    transform.SetParent(wizard.transform, true);
-                    playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x + platformSpeed.x, jumpingPower + platformSpeed.y);
-                }
-                else
-                {
-                    playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpingPower);
-                }
+                //playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpingPower);
+                playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x + groundSpeed.x, jumpingPower + groundSpeed.y);
             }
         }
 
@@ -78,25 +78,33 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()  // Is called exactly 50 times per second, regardless of framerate
     {
-        playerRigidbody.velocity = new Vector2(horizontal * speed, playerRigidbody.velocity.y);
-        // The horizontal velocity is multiplied by the speed.
-        // This is separate from framerate so that, if the game changes in framerate, there's not an exponential increase of speed.
-        // Fun Fact, you'll find that mistake abused in Super Mario 64 speedruns.
+        if (horizontal != 0)
+        {
+            playerRigidbody.velocity = new Vector2(horizontal * speed, playerRigidbody.velocity.y);
+            transform.SetParent(wizard.transform);
+        }
+        else
+        {
+            if (currentGround)
+            {
+                playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
+                if (currentGround.tag == "Moving Platform") transform.SetParent(currentGround.transform);
+            } else playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Moving Platform")
-        {
-            transform.SetParent(collision.transform, true);
-        }
+        if (collision.gameObject.GetComponent<BoxCollider2D>()) if (transform.position.y >= (collision.gameObject.transform.position.y + collision.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2))
+            {
+                currentGround = collision.gameObject;
+                if (currentGround.tag == "Moving Platform") transform.SetParent(currentGround.transform);
+            }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Moving Platform")
-        {
-            transform.SetParent(wizard.transform, true);
-        }
+        currentGround = null;
+        transform.SetParent(wizard.transform);
     }
 }

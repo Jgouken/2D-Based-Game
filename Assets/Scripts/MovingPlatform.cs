@@ -13,8 +13,8 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private Cooldown cooldown;
 
     private bool toEnd = true;
-    public float xspeed;
-    public float yspeed;
+    private float xspeed;
+    private float yspeed;
     
     void Start()
     {
@@ -24,14 +24,14 @@ public class MovingPlatform : MonoBehaviour
         }
         platform.tag = "Moving Platform";
         platform.transform.position = start.position;
-        xspeed = Math.Abs(start.position.x - end.position.x) / ((seconds / 2) * 100);
-        yspeed = Math.Abs(start.position.y - end.position.y) / ((seconds / 2) * 100);
+        xspeed = Math.Abs(start.position.x - end.position.x) / ((seconds / 2) * 1000);
+        yspeed = Math.Abs(start.position.y - end.position.y) / ((seconds / 2) * 1000);
         if (seconds <= 0) seconds = 0.1f;
     }
 
     // Update is called once per frame
 
-    void FixedUpdate()
+    void Update()
     {
         if (!cooldown.IsCoolingDown)
         {

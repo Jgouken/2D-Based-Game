@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -52,7 +53,7 @@ public class MousePosition : MonoBehaviour
             Debug.DrawRay(new Vector3(telepoint.position.x, (telepoint.position.y - hitGround.distance) + offsetPosition, telepoint.position.z), Vector2.right * hitRight.distance, Color.red);
             // Shows the rays.
 
-            playerCopy.transform.localScale = player.transform.localScale;
+            if (Math.Abs(player.transform.localScale.x) == 1) playerCopy.transform.localScale = player.transform.localScale;
 
             if (hitGround.collider != null && telepoint.position.y < (telepoint.position.y - hitGround.distance) + (playerHitbox.size.y))
             // If there is ground under the telepoint and your mouse is close enough to the ground
