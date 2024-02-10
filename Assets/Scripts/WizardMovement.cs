@@ -6,22 +6,36 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-    private float horizontal;
-    // Used for the horizontal input
-    public float speed = 8f;
-    // The speed (world units per second) that the player travels
-    public float jumpingPower = 40f;
-    // The POWER (world units per second) of dem legs
-    private bool isFacingRight = true;
-    // The direction of the character
-
+    [SerializeField] private GameObject wizard;
     [SerializeField] private Rigidbody2D playerRigidbody;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask[] groundLayers;
     // Gets other objects' components used and such
+
+    void Start()
+    {
+        var float horizontal;
+        // Used for the horizontal input
+        var float speed = 8f;
+        // The speed (world units per second) that the player travels
+        var float jumpingPower = 40f;
+        // The POWER (world units per second) of dem legs
+        var bool isFacingRight = true;
+        // The direction of the character
+        var Vector2 platformSpeed = new Vector2(0, 0);
+        // Ha
+        var Transform platformLastPos;
+    }
+
     void Update() // Is called once per frame
     {
+        if (transform.parent != wizard.transform)
+        {
+            platformSpeed = new Vector2((transform.parent.transform.position.x - platformLastPos.position.x) / (1.0f / Time.deltaTime), (transform.parent.transform.position.y - platformLastPos.position.y) / (1.0f / Time.deltaTime));
+            //if (platformLastPos) platformSpeed = new Vector2((transform.parent.transform.position.x - platformLastPos.x) / 50, 0);
+            platformLastPos = transform.parent;
+        }
+
         horizontal = Input.GetAxisRaw("Horizontal");
         // Gets the horizontal input from the player which is set in Unity in the [Edit -> Settings -> Input] settings
         for (int i = 0; i < groundLayers.Length; i++)
@@ -29,9 +43,17 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButtonDown("Jump") && Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayers[i]))
             // If the "Jump" button is pressed and the groundCheck object is within anything on the groundLayer layer
             {
-                playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpingPower);
                 // Does not change the x velocity, then sets the y velocity to the jumpingPower variable
                 i = groundLayers.Length;
+                if (transform.parent != wizard)
+                {
+                    transform.SetParent(wizard.transform, true);
+                    playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x + platformSpeed.x, jumpingPower + platformSpeed.y);
+                }
+                else
+                {
+                    playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpingPower);
+                }
             }
         }
 
@@ -60,5 +82,21 @@ public class PlayerMovement : MonoBehaviour
         // The horizontal velocity is multiplied by the speed.
         // This is separate from framerate so that, if the game changes in framerate, there's not an exponential increase of speed.
         // Fun Fact, you'll find that mistake abused in Super Mario 64 speedruns.
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Moving Platform")
+        {
+            transform.SetParent(collision.transform, true);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Moving Platform")
+        {
+            transform.SetParent(wizard.transform, true);
+        }
     }
 }

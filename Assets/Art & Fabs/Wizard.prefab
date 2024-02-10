@@ -310,6 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   jumpingPower: 40
+  wizard: {fileID: 4369153088515248647}
   playerRigidbody: {fileID: 8938133045821847539}
   groundCheck: {fileID: 5522470282881395274}
   groundLayers:

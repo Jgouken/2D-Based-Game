@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 430976005743739742}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.197, y: 0, z: 0}
+  m_LocalPosition: {x: -0.11, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42,7 +42,7 @@ ParticleSystem:
   m_GameObject: {fileID: 430976005743739742}
   serializedVersion: 8
   lengthInSec: 5
-  simulationSpeed: 1
+  simulationSpeed: 0.51
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.62
+      scalar: 0.66
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -169,7 +169,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.14
+      scalar: 1.48
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -287,7 +287,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.88
+      scalar: 0.92
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -672,7 +672,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 0.6074202, y: 0.5853598, z: 1}
+    m_Scale: {x: 0.6074202, y: 1.0135127, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -1495,7 +1495,7 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3.29
+      scalar: 1.81
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4843,7 +4843,7 @@ GameObject:
   - component: {fileID: 4605519384047796132}
   m_Layer: 3
   m_Name: Magic Platform
-  m_TagString: Magic Platform
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4858,7 +4858,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.6793, y: 1.52, z: -0.08762967}
-  m_LocalScale: {x: 17.510357, y: -0.66213924, z: 1}
+  m_LocalScale: {x: 3.5906222, y: -0.66213924, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3481157551778671237}

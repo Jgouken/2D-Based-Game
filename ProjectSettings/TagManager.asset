@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Vague Magic
   - Magic Platform
+  - Moving Platform
   layers:
   - Default
   - TransparentFX

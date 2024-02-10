@@ -10,7 +10,7 @@ public class Magivision : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject magivision;
-    [HideInInspector] public GameObject[] magiforms;
+    [HideInInspector] public List<GameObject> magiforms;
     public float visionSize;
     public float maximumVisionSize; // This value should only be set level-per-level, not manually. If kept unset (0), it will default to 8 times the player's hitbox size.
 
@@ -19,7 +19,11 @@ public class Magivision : MonoBehaviour
     {
         if (maximumVisionSize <= 0) maximumVisionSize = player.GetComponent<BoxCollider2D>().size.y * 8;
         visionSize = 0;
-        magiforms = GameObject.FindGameObjectsWithTag("Magic Platform");
+
+        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+        foreach (GameObject go in allObjects) {
+            if (go.layer == 3) magiforms.Add(go);
+        }
     }
 
     // Update is called once per frame

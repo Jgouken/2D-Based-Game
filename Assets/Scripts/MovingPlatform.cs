@@ -6,22 +6,24 @@ using UnityEngine.UIElements;
 
 public class MovingPlatform : MonoBehaviour
 {
-    [SerializeField] private Transform platform;
+    [SerializeField] private GameObject platform;
     [SerializeField] private Transform start;
     [SerializeField] private Transform end;
     [SerializeField] private float seconds;
     [SerializeField] private Cooldown cooldown;
 
     private bool toEnd = true;
-    private float xspeed;
-    private float yspeed;
+    public float xspeed;
+    public float yspeed;
+    
     void Start()
     {
         if (start.position.x > end.position.y)
         {
             Debug.LogError("Start must be lower or equal to the x position of End.");
         }
-        platform.position = start.position;
+        platform.tag = "Moving Platform";
+        platform.transform.position = start.position;
         xspeed = Math.Abs(start.position.x - end.position.x) / ((seconds / 2) * 100);
         yspeed = Math.Abs(start.position.y - end.position.y) / ((seconds / 2) * 100);
         if (seconds <= 0) seconds = 0.1f;
@@ -35,8 +37,8 @@ public class MovingPlatform : MonoBehaviour
         {
             if (toEnd)
             {
-                platform.position = new Vector3(platform.position.x + xspeed, platform.position.y - yspeed);
-                if (platform.position.x >= end.position.x)
+                platform.transform.position = new Vector3(platform.transform.position.x + xspeed, platform.transform.position.y - yspeed);
+                if (platform.transform.position.x >= end.position.x)
                 {
                     toEnd = false;
                     cooldown.StartCooldown();
@@ -44,8 +46,8 @@ public class MovingPlatform : MonoBehaviour
             }
             else
             {
-                platform.position = new Vector3(platform.position.x - xspeed, platform.position.y + yspeed);
-                if (platform.position.x <= start.position.x)
+                platform.transform.position = new Vector3(platform.transform.position.x - xspeed, platform.transform.position.y + yspeed);
+                if (platform.transform.position.x <= start.position.x)
                 {
                     toEnd = true;
                     cooldown.StartCooldown();
