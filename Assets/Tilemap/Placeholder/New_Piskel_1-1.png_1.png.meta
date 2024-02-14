@@ -114,7 +114,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 160
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5a10474c8ed5d14c8c4950bf6a34f7c
-      internalID: 1255550268
+      spriteID: 89734fa13416ec4449553dc32d3439ba
+      internalID: -469882371
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 160
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5d9be40816837a4ebd9cf9a02fc5815
-      internalID: -394646627
+      spriteID: 7d5c1dbfe8529e14f9329c6e64d9f3cd
+      internalID: 1650425568
       vertices: []
       indices: 
       edges: []
@@ -156,7 +156,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 160
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f79aa62dc6227f845a42311a0dbff76b
-      internalID: 1877166958
+      spriteID: 44dceedc8ea382d42a48fcabcb610c13
+      internalID: 2039646026
       vertices: []
       indices: 
       edges: []
@@ -177,7 +177,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 160
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25e64ae94cdfaf64ea9f709218fffa8c
-      internalID: -1067703591
+      spriteID: 1163def486227644883f39a8d287c008
+      internalID: 157045192
       vertices: []
       indices: 
       edges: []
@@ -197,8 +197,8 @@ TextureImporter:
       name: New_Piskel_1-1.png_1_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 160
+        x: 0
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -208,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 775532bfd2696cb449132bd1ae2a081d
-      internalID: 847398488
+      spriteID: 01ee711c021ddde4e8502a69c5f04234
+      internalID: -717574150
       vertices: []
       indices: 
       edges: []
@@ -218,8 +218,8 @@ TextureImporter:
       name: New_Piskel_1-1.png_1_5
       rect:
         serializedVersion: 2
-        x: 160
-        y: 160
+        x: 32
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -229,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ac0004acd53e9548a623f046a935f64
-      internalID: -661759768
+      spriteID: 90eb393fd66d48a44924f125ff20d3b8
+      internalID: 1705359555
       vertices: []
       indices: 
       edges: []
@@ -239,8 +239,8 @@ TextureImporter:
       name: New_Piskel_1-1.png_1_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 64
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -250,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 083a945e0f842644e9a05759a3773e30
-      internalID: 761293932
+      spriteID: 6f64ffbee8eed0746a4ef5b4dbac6205
+      internalID: -1723470045
       vertices: []
       indices: 
       edges: []
@@ -260,8 +260,8 @@ TextureImporter:
       name: New_Piskel_1-1.png_1_7
       rect:
         serializedVersion: 2
-        x: 32
-        y: 128
+        x: 96
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -271,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e10fbf8dbadbea40b7477f3a625edfd
-      internalID: -1932240225
+      spriteID: 0907a8b32acff974facc08e68c9bf712
+      internalID: 2052965609
       vertices: []
       indices: 
       edges: []
@@ -281,8 +281,8 @@ TextureImporter:
       name: New_Piskel_1-1.png_1_8
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
+        x: 0
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -292,8 +292,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a6ddd16b80b1d64e90dd6ddba3bacc6
-      internalID: 873601196
+      spriteID: a6e975c2a789f9642a165b9848e85652
+      internalID: 1700063830
       vertices: []
       indices: 
       edges: []
@@ -302,8 +302,8 @@ TextureImporter:
       name: New_Piskel_1-1.png_1_9
       rect:
         serializedVersion: 2
-        x: 96
-        y: 128
+        x: 32
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -313,8 +313,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 171072150eddfc5489c172a48ad6ff93
-      internalID: -202773627
+      spriteID: bda313ff91bcab24987a968c86b10ead
+      internalID: -876498061
       vertices: []
       indices: 
       edges: []
@@ -323,8 +323,8 @@ TextureImporter:
       name: New_Piskel_1-1.png_1_10
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
+        x: 64
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -334,8 +334,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7f14fab5fa2d1542b97d62c3ac27311
-      internalID: -497616621
+      spriteID: 7e192b17d635d2746a2c134a99233138
+      internalID: -1815766783
       vertices: []
       indices: 
       edges: []
@@ -344,8 +344,8 @@ TextureImporter:
       name: New_Piskel_1-1.png_1_11
       rect:
         serializedVersion: 2
-        x: 160
-        y: 128
+        x: 96
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -355,8 +355,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 169fc22e21abad845a831d5519b13b3e
-      internalID: -275955249
+      spriteID: 0952caaa930b4e346b2f258447572abf
+      internalID: 23874803
       vertices: []
       indices: 
       edges: []
@@ -366,384 +366,6 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8dbcfe12d1672d74cbc8994058333321
-      internalID: -742585604
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_13
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a2363c1ed49236e4abebd8e928c0a39a
-      internalID: -1675074361
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_14
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 98659cb8d8b07f742b82ed679ad03604
-      internalID: -1454495861
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_15
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b23b64510955f2f43bea44aa924b48b0
-      internalID: -733969623
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_16
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9e5ab79ef6dec1443a7fb88b450dcc68
-      internalID: -1013082935
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_17
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a353bf784642514089494cc6c638e0d
-      internalID: -1801675516
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_18
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d3a585518505f74794417dd2223e629
-      internalID: -625893382
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_19
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 14cf34e97dd308d4ea1d249e27c67d83
-      internalID: 1153919678
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_20
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 93d02c3d0c840c442a43618eb88e6ef1
-      internalID: -2070409364
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_21
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 21d61dcd1cefd9b44a0106a554c11f18
-      internalID: -2076731062
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_22
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 36e5fa58a7f6d8c439199c127ac2ccc4
-      internalID: -1349901595
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_23
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6d85b4b939f6fd34a8d3c812b4cf0157
-      internalID: -1553339828
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_24
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 85860dd5b5561a5479d4caf0c0abe278
-      internalID: 1976721052
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_25
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8692be3196eb2f4dbf0948bffa57d15
-      internalID: 1207108465
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_26
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2bb6a392ce6f64f46acf7a1667fcb11f
-      internalID: 587918878
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_27
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d62956daf15078f4386a3f7a21c4a15c
-      internalID: -1001525909
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_28
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dff80da1e33b9ad43b9e04a823251bde
-      internalID: 1575616602
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_29
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2da293109e03e484a9328dca38b2d9da
-      internalID: 561960282
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_30
-      rect:
-        serializedVersion: 2
-        x: 0
         y: 0
         width: 32
         height: 32
@@ -754,29 +376,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db85461435cbda347a90e1cb2354e481
-      internalID: 1061978003
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_Piskel_1-1.png_1_31
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d51a0b7e74d83146abbb789610c1fae
-      internalID: 597810150
+      spriteID: 5e48812baba536742a36f36be0717394
+      internalID: 142503255
       vertices: []
       indices: 
       edges: []
@@ -792,38 +393,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      New_Piskel_1-1.png_1_0: 1255550268
-      New_Piskel_1-1.png_1_1: -394646627
-      New_Piskel_1-1.png_1_10: -497616621
-      New_Piskel_1-1.png_1_11: -275955249
-      New_Piskel_1-1.png_1_12: -742585604
-      New_Piskel_1-1.png_1_13: -1675074361
-      New_Piskel_1-1.png_1_14: -1454495861
-      New_Piskel_1-1.png_1_15: -733969623
-      New_Piskel_1-1.png_1_16: -1013082935
-      New_Piskel_1-1.png_1_17: -1801675516
-      New_Piskel_1-1.png_1_18: -625893382
-      New_Piskel_1-1.png_1_19: 1153919678
-      New_Piskel_1-1.png_1_2: 1877166958
-      New_Piskel_1-1.png_1_20: -2070409364
-      New_Piskel_1-1.png_1_21: -2076731062
-      New_Piskel_1-1.png_1_22: -1349901595
-      New_Piskel_1-1.png_1_23: -1553339828
-      New_Piskel_1-1.png_1_24: 1976721052
-      New_Piskel_1-1.png_1_25: 1207108465
-      New_Piskel_1-1.png_1_26: 587918878
-      New_Piskel_1-1.png_1_27: -1001525909
-      New_Piskel_1-1.png_1_28: 1575616602
-      New_Piskel_1-1.png_1_29: 561960282
-      New_Piskel_1-1.png_1_3: -1067703591
-      New_Piskel_1-1.png_1_30: 1061978003
-      New_Piskel_1-1.png_1_31: 597810150
-      New_Piskel_1-1.png_1_4: 847398488
-      New_Piskel_1-1.png_1_5: -661759768
-      New_Piskel_1-1.png_1_6: 761293932
-      New_Piskel_1-1.png_1_7: -1932240225
-      New_Piskel_1-1.png_1_8: 873601196
-      New_Piskel_1-1.png_1_9: -202773627
+      New_Piskel_1-1.png_1_0: -469882371
+      New_Piskel_1-1.png_1_1: 1650425568
+      New_Piskel_1-1.png_1_10: -1815766783
+      New_Piskel_1-1.png_1_11: 23874803
+      New_Piskel_1-1.png_1_12: 142503255
+      New_Piskel_1-1.png_1_2: 2039646026
+      New_Piskel_1-1.png_1_3: 157045192
+      New_Piskel_1-1.png_1_4: -717574150
+      New_Piskel_1-1.png_1_5: 1705359555
+      New_Piskel_1-1.png_1_6: -1723470045
+      New_Piskel_1-1.png_1_7: 2052965609
+      New_Piskel_1-1.png_1_8: 1700063830
+      New_Piskel_1-1.png_1_9: -876498061
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
