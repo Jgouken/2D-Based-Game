@@ -11,14 +11,15 @@ public class Magivision : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject magivision;
     [HideInInspector] public List<GameObject> magiforms;
-    public float visionSize;
+    public float visionSize = 0f;
     public float maximumVisionSize; // This value should only be set level-per-level, not manually. If kept unset (0), it will default to 8 times the player's hitbox size.
+    public float visionSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         if (maximumVisionSize <= 0) maximumVisionSize = player.GetComponent<BoxCollider2D>().size.y * 8;
-        visionSize = 0;
+        if (visionSpeed <= 0) visionSpeed = .2f;
 
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
         foreach (GameObject go in allObjects) {
@@ -50,7 +51,7 @@ public class Magivision : MonoBehaviour
             // EnableMagivision(true);
             if (visionSize < maximumVisionSize)
             {
-                visionSize += player.GetComponent<BoxCollider2D>().size.y * 2 / (2 * (visionSize + 1 / player.GetComponent<BoxCollider2D>().size.y * 4));
+                visionSize += visionSpeed;
                 if (visionSize > maximumVisionSize) visionSize = maximumVisionSize;
                 magivision.transform.localScale = new Vector3(visionSize, visionSize);
             }
@@ -58,7 +59,7 @@ public class Magivision : MonoBehaviour
 
         if (visionSize > 0 && !Input.GetKey(KeyCode.LeftShift))
         {
-            visionSize -= player.GetComponent<BoxCollider2D>().size.y * 2 / (2 * (visionSize + 1 / player.GetComponent<BoxCollider2D>().size.y * 4));
+            visionSize -= visionSpeed;
             if (visionSize < 0) visionSize = 0;
             magivision.transform.localScale = new Vector3(visionSize, visionSize);
         }
