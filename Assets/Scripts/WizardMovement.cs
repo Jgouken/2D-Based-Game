@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (horizontal != 0)
         {
-            playerRigidbody.velocity = new Vector2((horizontal * speed) + groundSpeed.x, playerRigidbody.velocity.y);
+            playerRigidbody.velocity = new Vector2((horizontal * speed) + (horizontal > 0 ? Math.Abs(groundSpeed.x) : -Math.Abs(groundSpeed.x)), playerRigidbody.velocity.y);
             transform.SetParent(wizard.transform);
         }
         else
