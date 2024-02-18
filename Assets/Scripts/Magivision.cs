@@ -64,10 +64,4 @@ public class Magivision : MonoBehaviour
             magivision.transform.localScale = new Vector3(visionSize, visionSize);
         }
     }
-
-    void EnableMagivision(Boolean enabled)
-    {
-        magivision.GetComponent<SpriteMask>().enabled = enabled;
-        magivision.GetComponent<SpriteRenderer>().enabled = enabled;
-    }
 }

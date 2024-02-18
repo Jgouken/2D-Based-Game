@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6179828663333154518}
   - component: {fileID: 2478042493531395420}
   - component: {fileID: 5511697581923021721}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Telepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1915130516136315308}
-  m_Layer: 1
+  m_Layer: 7
   m_Name: Player Copy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ Transform:
   m_GameObject: {fileID: 4099614202210200788}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1674234, y: -1.342004, z: 0.06581796}
+  m_LocalPosition: {x: 5.17, y: 10.52, z: 0.06581796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -246,7 +246,8 @@ MonoBehaviour:
     m_Bits: 8
   currentGround: {fileID: 0}
   groundSpeed: {x: 0, y: 0}
-  lastGroundPos: 0
+  lastGroundPosX: 0
+  lastGroundPosY: 0
 --- !u!50 &8938133045821847539
 Rigidbody2D:
   serializedVersion: 4
@@ -328,7 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4979866057975286997}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wizard
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -365,7 +366,7 @@ GameObject:
   - component: {fileID: 1728491472699423524}
   - component: {fileID: 8281540584628873832}
   - component: {fileID: 8656694651799538935}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Magivision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,6 +508,7 @@ MonoBehaviour:
   magiforms: []
   visionSize: 0
   maximumVisionSize: 0
+  visionSpeed: 0
 --- !u!1 &5906763834787925422
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5522470282881395274}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Ground Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}

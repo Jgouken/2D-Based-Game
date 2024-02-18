@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 // This script should only be applied to the Wizard's "player" object.
 
@@ -26,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
     // The POWER (world units per second) of dem legs
     private bool isFacingRight = true;
     // The direction of the character
-
     void Update() // Is called once per frame
     {
         if (currentGround)
