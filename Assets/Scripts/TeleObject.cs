@@ -9,14 +9,12 @@ public class TeleObject : MonoBehaviour
 {
     public CompositeCollider2D boundary;
     private Vector2 positionOffset;
-    public float boundLeftSide;
     public bool selected = false;
     public bool grabbed = false;
 
     // Start is called before the first frame update
     void Start() {
         if (!boundary) boundary = transform.parent.gameObject.GetComponent<CompositeCollider2D>();
-        boundLeftSide = boundary.bounds.size.y;
     }
     void OnMouseOver()
     {
@@ -45,7 +43,16 @@ public class TeleObject : MonoBehaviour
         if (Input.GetMouseButton(0) && grabbed && !Input.GetKey(KeyCode.LeftShift))
         {
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (mousePos.x < boundary.GetComponent<Transform>().localPosition.x + (boundary.bounds.size.x / 2) - (boundary.GetComponent<BoxCollider2D>().bounds.size.x / 2)) transform.position = new Vector3(mousePos.x + positionOffset.x, mousePos.y + positionOffset.y);
+            transform.position = new Vector3(mousePos.x + positionOffset.x, mousePos.y + positionOffset.y);
         }
+    }
+
+    void LateUpdate() {
+        var rightEdge = 0.5000f - (gameObject.GetComponent<BoxCollider2D>().bounds.size.x / (boundary.bounds.size.x * 2));
+        var leftEdge = (gameObject.GetComponent<BoxCollider2D>().bounds.size.x / (boundary.bounds.size.x * 2)) -0.5000f;
+        var topEdge = 0.5000f - (gameObject.GetComponent<BoxCollider2D>().bounds.size.y / (boundary.bounds.size.y * 2));
+        var bottomEdge = (gameObject.GetComponent<BoxCollider2D>().bounds.size.y / (boundary.bounds.size.y * 2)) -0.5000f;
+
+        transform.localPosition = new Vector3(transform.localPosition.x > rightEdge ? rightEdge : transform.localPosition.x < leftEdge ? leftEdge : transform.localPosition.x, transform.localPosition.y > topEdge ? topEdge : transform.localPosition.y < bottomEdge ? bottomEdge : transform.localPosition.y);
     }
 }
