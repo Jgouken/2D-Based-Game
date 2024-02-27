@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6975155105543021334}
   - component: {fileID: 9023579739514855225}
   - component: {fileID: 6173458695913529865}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Telekinesis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,9 +28,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131714594911978610}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.762, y: -2.6184, z: 0.09076141}
-  m_LocalScale: {x: 30.449299, y: 11.995768, z: 1}
+  m_LocalScale: {x: 30.449299, y: 11.205246, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9103403889428202738}
@@ -200,19 +200,19 @@ CompositeCollider2D:
   - m_Collider: {fileID: 6975155105543021334}
     m_ColliderPaths:
     - - X: 152246496
-        Y: 59978836
+        Y: 56026228
       - X: -152246496
-        Y: 59978836
+        Y: 56026228
       - X: -152246496
-        Y: -59978836
+        Y: -56026228
       - X: 152246496
-        Y: -59978836
+        Y: -56026228
   m_CompositePaths:
     m_Paths:
-    - - {x: 15.224621, y: -5.997884}
-      - {x: 15.224621, y: 5.997884}
-      - {x: -15.224649, y: 5.997854}
-      - {x: -15.224621, y: -5.997884}
+    - - {x: 15.224621, y: -5.602623}
+      - {x: 15.224621, y: 5.602623}
+      - {x: -15.224649, y: 5.602594}
+      - {x: -15.224621, y: -5.602623}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 4330388900611904038}
   - component: {fileID: 2505761705629323097}
   - component: {fileID: 4197276070539954266}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: Teleobject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,8 +246,8 @@ Transform:
   m_GameObject: {fileID: 1252495276119629011}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.405, y: 0.12181, z: 0}
-  m_LocalScale: {x: 0.08299349, y: 0.19540893, z: 1}
+  m_LocalPosition: {x: -0.41019, y: 0.12181, z: 0}
+  m_LocalScale: {x: 0.0726052, y: 0.19540893, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3270502355884771857}
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boundary: {fileID: 6173458695913529865}
-  selected: 0
+  mouseSpeed: {x: 0, y: 0}
   grabbed: 0
 --- !u!212 &4330388900611904038
 SpriteRenderer:
