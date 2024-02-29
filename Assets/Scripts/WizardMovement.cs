@@ -13,8 +13,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask[] groundLayers;
     // Gets other objects' components used and such
-    [SerializeField] private bool isFacingRight = false;
-      // The direction of the character
 
     public GameObject currentGround;
     public Vector2 groundSpeed;
@@ -27,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     // The speed (world unit per second) that the player travels
     private float jumpingPower = 40f;
     // The POWER (world units per second) of dem legs
+    private bool isFacingRight = true;
+    // The direction of the character
     void Update() // Is called once per frame
     {
         if (currentGround)
