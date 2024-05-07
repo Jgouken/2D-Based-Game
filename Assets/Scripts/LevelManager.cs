@@ -22,11 +22,11 @@ public class LevelManager : MonoBehaviour
                 {
                     if (charact.transform.parent.gameObject.name.StartsWith("Bard"))
                     {
-                        prefb = Instantiate(wizardPrefab, charact.transform.position, Quaternion.identity);
+                        prefb = Instantiate(wizardPrefab, charact.transform.parent.position, Quaternion.identity);
                     }
                     else if (charact.transform.parent.gameObject.name.StartsWith("Wizard"))
                     {
-                        prefb = Instantiate(bardPrefab, charact.transform.position, Quaternion.identity);
+                        prefb = Instantiate(bardPrefab, charact.transform.parent.position, Quaternion.identity);
                     }
 
                     foreach (GameObject cam in GameObject.FindGameObjectsWithTag("Camera"))

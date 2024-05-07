@@ -17,7 +17,8 @@ public class BardMovement : MonoBehaviour
 
     public GameObject movingGround;
     public Vector2 movingGroundSpeed;
-    public string keyPasscode = "";
+    public string arrowCode = "";
+    public string submittedCode = "";
     public float lastMoveGroundPosX;
     public float lastMoveGroundPosY;
 
@@ -81,31 +82,32 @@ public class BardMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) && !cooldown.IsCoolingDown)
         {
-            if (keyPasscode.Length < 10)
+            if (arrowCode.Length < 10)
             {
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    keyPasscode = keyPasscode + "2";
+                    arrowCode = arrowCode + "2";
                 }
                 else if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    keyPasscode = keyPasscode + "1";
+                    arrowCode = arrowCode + "1";
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
-                    keyPasscode = keyPasscode + "4";
+                    arrowCode = arrowCode + "4";
                 }
                 else if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    keyPasscode = keyPasscode + "3";
+                    arrowCode = arrowCode + "3";
                 }
             }
         }
         else
         {
-            if (keyPasscode != "")
+            if (arrowCode != "")
             { // Such a weird way of doing it, I hate it
-                switch (keyPasscode)
+                submittedCode = arrowCode;
+                switch (arrowCode)
                 {
                     case "231":
                         {
@@ -128,7 +130,7 @@ public class BardMovement : MonoBehaviour
                             break;
                         }
                 }
-                keyPasscode = "";
+                arrowCode = "";
             }
         }
     }
