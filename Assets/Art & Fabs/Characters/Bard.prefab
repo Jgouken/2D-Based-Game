@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5446438076616510929}
   - component: {fileID: 7030845387932766283}
-  - component: {fileID: 3575199788984490795}
+  - component: {fileID: 8787912743522319091}
   - component: {fileID: 8938133045821847539}
   - component: {fileID: 7685004785086047605}
   m_Layer: 2
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3575199788984490795
+--- !u!114 &8787912743522319091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,17 +97,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4099614202210200788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b27b81f357ab9c44facc464ff5541f43, type: 3}
+  m_Script: {fileID: 11500000, guid: cfaa8cf3c10963841aac07475da0679b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wizard: {fileID: 4369153088515248647}
+  bard: {fileID: 4369153088515248647}
   playerRigidbody: {fileID: 8938133045821847539}
   groundCheck: {fileID: 5522470282881395274}
   groundLayers:
   - serializedVersion: 2
     m_Bits: 64
-  - serializedVersion: 2
-    m_Bits: 8
   currentGround: {fileID: 0}
   groundSpeed: {x: 0, y: 0}
   lastGroundPosX: 0
@@ -193,6 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4979866057975286997}
+  - component: {fileID: 8599578414717627465}
   m_Layer: 7
   m_Name: Bard
   m_TagString: Untagged
@@ -216,6 +215,22 @@ Transform:
   - {fileID: 5446438076616510929}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8599578414717627465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4369153088515248647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa04dcbe101a0b4cb988c1463c11e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyPasscode: 
+  cooldown:
+    cooldownTime: 0
+  player: {fileID: 4099614202210200788}
 --- !u!1 &5906763834787925422
 GameObject:
   m_ObjectHideFlags: 0

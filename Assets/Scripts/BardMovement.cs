@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
-// This script should only be applied to the Wizard's "player" object.
+// This script should only be applied to the bard's "player" object.
 
-public class WizardMovement : MonoBehaviour
+public class BardMovement : MonoBehaviour
 {
-    [SerializeField] private GameObject wizard;
+    [SerializeField] private GameObject bard;
     [SerializeField] private Rigidbody2D playerRigidbody;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask[] groundLayers;
@@ -81,7 +81,7 @@ public class WizardMovement : MonoBehaviour
         if (horizontal != 0)
         {
             playerRigidbody.velocity = new Vector2((horizontal * speed) + (horizontal > 0 ? Math.Abs(groundSpeed.x) : -Math.Abs(groundSpeed.x)), playerRigidbody.velocity.y);
-            transform.SetParent(wizard.transform);
+            transform.SetParent(bard.transform);
         }
         else
         {
@@ -102,6 +102,6 @@ public class WizardMovement : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         currentGround = null;
-        transform.SetParent(wizard.transform);
+        transform.SetParent(bard.transform);
     }
 }
