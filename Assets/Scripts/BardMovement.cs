@@ -12,13 +12,15 @@ public class BardMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D playerRigidbody;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask[] groundLayers;
+    [SerializeField] private Cooldown cooldown;
     // Gets other objects' components used and such
 
-    public GameObject currentGround;
-    public Vector2 groundSpeed;
+    public GameObject movingGround;
+    public Vector2 movingGroundSpeed;
+    public string keyPasscode = "";
+    public float lastMoveGroundPosX;
+    public float lastMoveGroundPosY;
 
-    public float lastGroundPosX;
-    public float lastGroundPosY;
     private float horizontal;
     // Used for the horizontal input
     private float speed = 8f;
@@ -29,21 +31,23 @@ public class BardMovement : MonoBehaviour
     // The direction of the character
     void Update() // Is called once per frame
     {
-        if (currentGround)
+        if (movingGround)
         {
-            //if (lastGroundPos) groundSpeed = new Vector2(Math.Abs(lastGroundPos.position.x - currentGround.transform.position.x), Math.Abs(lastGroundPos.position.y - currentGround.transform.position.y));
-            if (lastGroundPosX != 0 && lastGroundPosY != 0) groundSpeed = new Vector2(-(lastGroundPosX - currentGround.transform.position.x) / Time.deltaTime, -(lastGroundPosY - currentGround.transform.position.y) / Time.deltaTime);
-            lastGroundPosX = currentGround.transform.position.x;
-            lastGroundPosY = currentGround.transform.position.y;
+            //if (lastGroundPos) movingGroundSpeed = new Vector2(Math.Abs(lastGroundPos.position.x - movingGround.transform.position.x), Math.Abs(lastGroundPos.position.y - movingGround.transform.position.y));
+            if (lastMoveGroundPosX != 0 && lastMoveGroundPosY != 0) movingGroundSpeed = new Vector2(-(lastMoveGroundPosX - movingGround.transform.position.x) / Time.deltaTime, -(lastMoveGroundPosY - movingGround.transform.position.y) / Time.deltaTime);
+            lastMoveGroundPosX = movingGround.transform.position.x;
+            lastMoveGroundPosY = movingGround.transform.position.y;
         }
         else
         {
-            lastGroundPosX = 0;
-            lastGroundPosY = 0;
-            groundSpeed = new Vector2(0, 0);
+            lastMoveGroundPosX = 0;
+            lastMoveGroundPosY = 0;
+            movingGroundSpeed = new Vector2(0, 0);
         }
 
-        horizontal = Input.GetAxisRaw("Horizontal");
+        float lbut = Input.GetKey(KeyCode.A) ? -1 : 0;
+        float rbut = Input.GetKey(KeyCode.D) ? 1 : 0;
+        horizontal = lbut + rbut;
         // Gets the horizontal input from the player which is set in Unity in the [Edit -> Settings -> Input] settings
         for (int i = 0; i < groundLayers.Length; i++)
         {
@@ -53,7 +57,7 @@ public class BardMovement : MonoBehaviour
                 // Does not change the x velocity, then sets the y velocity to the jumpingPower variable
                 i = groundLayers.Length;
                 //playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpingPower);
-                playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x + groundSpeed.x, jumpingPower + groundSpeed.y);
+                playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x + movingGroundSpeed.x, jumpingPower + movingGroundSpeed.y);
             }
         }
 
@@ -74,18 +78,71 @@ public class BardMovement : MonoBehaviour
             transform.localScale = localScale;
             // Applies it to the player
         }
+
+        if (Input.GetKey(KeyCode.LeftShift) && !cooldown.IsCoolingDown)
+        {
+            if (keyPasscode.Length < 10)
+            {
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    keyPasscode = keyPasscode + "2";
+                }
+                else if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    keyPasscode = keyPasscode + "1";
+                }
+                else if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    keyPasscode = keyPasscode + "4";
+                }
+                else if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    keyPasscode = keyPasscode + "3";
+                }
+            }
+        }
+        else
+        {
+            if (keyPasscode != "")
+            { // Such a weird way of doing it, I hate it
+                switch (keyPasscode)
+                {
+                    case "231":
+                        {
+                            Debug.Log("Rain");
+                            break;
+                        }
+                    case "234":
+                        {
+                            Debug.Log("Sun");
+                            break;
+                        }
+                    case "231432":
+                        {
+                            Debug.Log("Time");
+                            break;
+                        }
+                    case "413":
+                        {
+                            Debug.Log("Entrance");
+                            break;
+                        }
+                }
+                keyPasscode = "";
+            }
+        }
     }
 
     private void FixedUpdate()  // Is called exactly 50 times per second, regardless of framerate
     {
         if (horizontal != 0)
         {
-            playerRigidbody.velocity = new Vector2((horizontal * speed) + (horizontal > 0 ? Math.Abs(groundSpeed.x) : -Math.Abs(groundSpeed.x)), playerRigidbody.velocity.y);
+            playerRigidbody.velocity = new Vector2((horizontal * speed) + (horizontal > 0 ? Math.Abs(movingGroundSpeed.x) : -Math.Abs(movingGroundSpeed.x)), playerRigidbody.velocity.y);
             transform.SetParent(bard.transform);
         }
         else
         {
-            if (currentGround) if (currentGround.tag == "Moving Platform") transform.SetParent(currentGround.transform);
+            if (movingGround) if (movingGround.tag == "Moving Platform") transform.SetParent(movingGround.transform);
             playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
         }
     }
@@ -94,14 +151,14 @@ public class BardMovement : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<BoxCollider2D>()) if (transform.position.y >= (collision.gameObject.transform.position.y + collision.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2))
             {
-                currentGround = collision.gameObject;
-                if (currentGround.tag == "Moving Platform") transform.SetParent(currentGround.transform);
+                movingGround = collision.gameObject;
+                if (movingGround.tag == "Moving Platform") transform.SetParent(movingGround.transform);
             }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        currentGround = null;
+        movingGround = null;
         transform.SetParent(bard.transform);
     }
 }

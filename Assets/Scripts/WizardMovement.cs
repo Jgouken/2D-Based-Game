@@ -14,11 +14,12 @@ public class WizardMovement : MonoBehaviour
     [SerializeField] private LayerMask[] groundLayers;
     // Gets other objects' components used and such
 
-    public GameObject currentGround;
-    public Vector2 groundSpeed;
+    public GameObject movingGround;
+    public Vector2 movingGroundSpeed;
 
-    public float lastGroundPosX;
-    public float lastGroundPosY;
+    public bool isMobile = true;
+    public float lastMoveGroundPosX;
+    public float lastMoveGroundPosY;
     private float horizontal;
     // Used for the horizontal input
     private float speed = 8f;
@@ -29,21 +30,22 @@ public class WizardMovement : MonoBehaviour
     // The direction of the character
     void Update() // Is called once per frame
     {
-        if (currentGround)
+        if (movingGround)
         {
-            //if (lastGroundPos) groundSpeed = new Vector2(Math.Abs(lastGroundPos.position.x - currentGround.transform.position.x), Math.Abs(lastGroundPos.position.y - currentGround.transform.position.y));
-            if (lastGroundPosX != 0 && lastGroundPosY != 0) groundSpeed = new Vector2(-(lastGroundPosX - currentGround.transform.position.x) / Time.deltaTime, -(lastGroundPosY - currentGround.transform.position.y) / Time.deltaTime);
-            lastGroundPosX = currentGround.transform.position.x;
-            lastGroundPosY = currentGround.transform.position.y;
+            //if (lastGroundPos) movingGroundSpeed = new Vector2(Math.Abs(lastGroundPos.position.x - movingGround.transform.position.x), Math.Abs(lastGroundPos.position.y - movingGround.transform.position.y));
+            if (lastMoveGroundPosX != 0 && lastMoveGroundPosY != 0) movingGroundSpeed = new Vector2(-(lastMoveGroundPosX - movingGround.transform.position.x) / Time.deltaTime, -(lastMoveGroundPosY - movingGround.transform.position.y) / Time.deltaTime);
+            lastMoveGroundPosX = movingGround.transform.position.x;
+            lastMoveGroundPosY = movingGround.transform.position.y;
         }
         else
         {
-            lastGroundPosX = 0;
-            lastGroundPosY = 0;
-            groundSpeed = new Vector2(0, 0);
+            lastMoveGroundPosX = 0;
+            lastMoveGroundPosY = 0;
+            movingGroundSpeed = new Vector2(0, 0);
         }
 
-        horizontal = Input.GetAxisRaw("Horizontal");
+        if (isMobile) horizontal = Input.GetAxisRaw("Horizontal");
+        else horizontal = 0;
         // Gets the horizontal input from the player which is set in Unity in the [Edit -> Settings -> Input] settings
         for (int i = 0; i < groundLayers.Length; i++)
         {
@@ -53,7 +55,7 @@ public class WizardMovement : MonoBehaviour
                 // Does not change the x velocity, then sets the y velocity to the jumpingPower variable
                 i = groundLayers.Length;
                 //playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpingPower);
-                playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x + groundSpeed.x, jumpingPower + groundSpeed.y);
+                playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x + movingGroundSpeed.x, jumpingPower + movingGroundSpeed.y);
             }
         }
 
@@ -80,12 +82,12 @@ public class WizardMovement : MonoBehaviour
     {
         if (horizontal != 0)
         {
-            playerRigidbody.velocity = new Vector2((horizontal * speed) + (horizontal > 0 ? Math.Abs(groundSpeed.x) : -Math.Abs(groundSpeed.x)), playerRigidbody.velocity.y);
+            playerRigidbody.velocity = new Vector2((horizontal * speed) + (horizontal > 0 ? Math.Abs(movingGroundSpeed.x) : -Math.Abs(movingGroundSpeed.x)), playerRigidbody.velocity.y);
             transform.SetParent(wizard.transform);
         }
         else
         {
-            if (currentGround) if (currentGround.tag == "Moving Platform") transform.SetParent(currentGround.transform);
+            if (movingGround) if (movingGround.tag == "Moving Platform") transform.SetParent(movingGround.transform);
             playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
         }
     }
@@ -94,14 +96,14 @@ public class WizardMovement : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<BoxCollider2D>()) if (transform.position.y >= (collision.gameObject.transform.position.y + collision.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2))
             {
-                currentGround = collision.gameObject;
-                if (currentGround.tag == "Moving Platform") transform.SetParent(currentGround.transform);
+                movingGround = collision.gameObject;
+                if (movingGround.tag == "Moving Platform") transform.SetParent(movingGround.transform);
             }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        currentGround = null;
+        movingGround = null;
         transform.SetParent(wizard.transform);
     }
 }
