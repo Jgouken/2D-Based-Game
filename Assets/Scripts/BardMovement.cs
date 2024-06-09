@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.UI;
 
 // This script should only be applied to the bard's "player" object.
 
@@ -13,6 +14,16 @@ public class BardMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask[] groundLayers;
     [SerializeField] private Cooldown cooldown;
+
+    // Arrows
+    public GameObject left;
+    public GameObject right;
+    public GameObject down;
+    public GameObject up;
+    private GameObject currentArrow;
+
+    public List<GameObject> arrowObjects = new List<GameObject>();
+
     // Gets other objects' components used and such
 
     public GameObject movingGround;
@@ -84,21 +95,59 @@ public class BardMovement : MonoBehaviour
         {
             if (arrowCode.Length < 10)
             {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    arrowCode = arrowCode + "2";
-                }
-                else if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
+                    // Left
                     arrowCode = arrowCode + "1";
+                    currentArrow = Instantiate(left, transform);
+                    currentArrow.transform.position = new Vector3(currentArrow.transform.position.x, currentArrow.transform.position.y + 2);
+                    currentArrow.transform.localScale = new Vector3(-1, 1, 0);
+                    foreach (var arrow in arrowObjects)
+                    {
+                        // GET OUT OF THE WAY, DAYUM
+                        arrow.transform.position = new Vector3(arrow.transform.position.x - (isFacingRight == true ? 2 : -2), arrow.transform.position.y);
+                    }
+                    arrowObjects.Add(currentArrow);
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
+                    // Right
                     arrowCode = arrowCode + "4";
+                    currentArrow = Instantiate(right, transform);
+                    currentArrow.transform.position = new Vector3(currentArrow.transform.position.x, currentArrow.transform.position.y + 2);
+                    currentArrow.transform.localScale = new Vector3(-1, 1, 0);
+                    foreach (var arrow in arrowObjects)
+                    {
+                        // GET OUT OF THE WAY, DAYUM
+                        arrow.transform.position = new Vector3(arrow.transform.position.x - (isFacingRight == true ? 2 : -2), arrow.transform.position.y);
+                    }
+                    arrowObjects.Add(currentArrow);
+                }
+                else if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    // Up
+                    arrowCode = arrowCode + "2";
+                    currentArrow = Instantiate(up, transform);
+                    currentArrow.transform.position = new Vector3(currentArrow.transform.position.x, currentArrow.transform.position.y + 2);
+                    foreach (var arrow in arrowObjects)
+                    {
+                        // GET OUT OF THE WAY, DAYUM
+                        arrow.transform.position = new Vector3(arrow.transform.position.x - (isFacingRight == true ? 2 : -2), arrow.transform.position.y);
+                    }
+                    arrowObjects.Add(currentArrow);
                 }
                 else if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    // Down
                     arrowCode = arrowCode + "3";
+                    currentArrow = Instantiate(down, transform);
+                    currentArrow.transform.position = new Vector3(currentArrow.transform.position.x, currentArrow.transform.position.y + 2);
+                    foreach (var arrow in arrowObjects)
+                    {
+                        // GET OUT OF THE WAY, DAYUM
+                        arrow.transform.position = new Vector3(arrow.transform.position.x - (isFacingRight == true ? 2 : -2), arrow.transform.position.y);
+                    }
+                    arrowObjects.Add(currentArrow);
                 }
             }
         }
@@ -131,6 +180,11 @@ public class BardMovement : MonoBehaviour
                         }
                 }
                 arrowCode = "";
+                foreach (var arrow in arrowObjects)
+                {
+                    Destroy(arrow);
+                }
+                arrowObjects = new List<GameObject>();
             }
         }
     }
