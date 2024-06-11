@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     public GameObject wizardPrefab;
     public GameObject bardPrefab;
+    public GameObject roguePrefab;
 
     private GameObject prefb = null;
 
@@ -25,6 +26,10 @@ public class LevelManager : MonoBehaviour
                         prefb = Instantiate(wizardPrefab, charact.transform.parent.position, Quaternion.identity);
                     }
                     else if (charact.transform.parent.gameObject.name.StartsWith("Wizard"))
+                    {
+                        prefb = Instantiate(roguePrefab, charact.transform.parent.position, Quaternion.identity);
+                    }
+                    else if (charact.transform.parent.gameObject.name.StartsWith("Rogue"))
                     {
                         prefb = Instantiate(bardPrefab, charact.transform.parent.position, Quaternion.identity);
                     }
