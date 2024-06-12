@@ -244,10 +244,11 @@ MonoBehaviour:
     m_Bits: 64
   - serializedVersion: 2
     m_Bits: 8
-  currentGround: {fileID: 0}
-  groundSpeed: {x: 0, y: 0}
-  lastGroundPosX: 0
-  lastGroundPosY: 0
+  movingGround: {fileID: 0}
+  movingGroundSpeed: {x: 0, y: 0}
+  isMobile: 1
+  lastMoveGroundPosX: 0
+  lastMoveGroundPosY: 0
 --- !u!50 &8938133045821847539
 Rigidbody2D:
   serializedVersion: 4
@@ -307,7 +308,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.15030006, y: -0.19257051}
+  m_Offset: {x: -0.15030006, y: -0.15235233}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -318,7 +319,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9078197, y: 2.3845687}
+  m_Size: {x: 0.9078197, y: 2.532034}
   m_EdgeRadius: 0
 --- !u!1 &4369153088515248647
 GameObject:
@@ -332,7 +333,7 @@ GameObject:
   m_Layer: 7
   m_Name: Wizard
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

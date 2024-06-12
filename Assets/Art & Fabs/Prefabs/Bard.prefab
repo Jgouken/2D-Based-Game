@@ -113,6 +113,7 @@ MonoBehaviour:
   down: {fileID: 1334434058099382977, guid: ea409e6e391f9f4449ee06ce9b22e473, type: 3}
   up: {fileID: 1334434058099382977, guid: b6b0234528a5e924c88af4b13f8e2b29, type: 3}
   arrowObjects: []
+  isMobile: 1
   movingGround: {fileID: 0}
   movingGroundSpeed: {x: 0, y: 0}
   arrowCode: 
@@ -203,7 +204,7 @@ GameObject:
   m_Layer: 7
   m_Name: Bard
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

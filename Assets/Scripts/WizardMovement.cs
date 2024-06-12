@@ -47,9 +47,9 @@ public class WizardMovement : MonoBehaviour
         if (isMobile) horizontal = Input.GetAxisRaw("Horizontal");
         else horizontal = 0;
         // Gets the horizontal input from the player which is set in Unity in the [Edit -> Settings -> Input] settings
-        for (int i = 0; i < groundLayers.Length; i++)
+        if (isMobile) for (int i = 0; i < groundLayers.Length; i++)
         {
-            if (Input.GetButtonDown("Jump") && Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayers[i]))
+            if (Input.GetButtonDown("Jump") && Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayers[i]) && isMobile)
             // If the "Jump" button is pressed and the groundCheck object is within anything on the groundLayer layer
             {
                 // Does not change the x velocity, then sets the y velocity to the jumpingPower variable

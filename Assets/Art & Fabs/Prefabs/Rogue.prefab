@@ -100,17 +100,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9159c1a6a45862d4ab751d8164a17163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rogue: {fileID: 4369153088515248647}
+  rogue: {fileID: 4099614202210200788}
   playerRigidbody: {fileID: 8938133045821847539}
+  playerHitbox: {fileID: 7685004785086047605}
   groundCheck: {fileID: 5522470282881395274}
   groundLayers:
   - serializedVersion: 2
     m_Bits: 64
+  cooldown:
+    cooldownTime: 2
   movingGround: {fileID: 0}
   movingGroundSpeed: {x: 0, y: 0}
   isMobile: 1
   lastMoveGroundPosX: 0
   lastMoveGroundPosY: 0
+  dashSensitivity: 0.3
+  dashDistance: 5
 --- !u!50 &8938133045821847539
 Rigidbody2D:
   serializedVersion: 4
@@ -170,7 +175,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.008838177, y: -0.24848366}
+  m_Offset: {x: -0.0507555, y: -0.24589252}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -181,7 +186,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8304014, y: 1.5157604}
+  m_Size: {x: 0.7319422, y: 1.5209427}
   m_EdgeRadius: 0
 --- !u!1 &4369153088515248647
 GameObject:
@@ -192,10 +197,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4979866057975286997}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Rogue
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -224,7 +229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5522470282881395274}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Ground Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,8 +10,10 @@ public class RogueMovement : MonoBehaviour
 {
     [SerializeField] private GameObject rogue;
     [SerializeField] private Rigidbody2D playerRigidbody;
+    [SerializeField] private BoxCollider2D playerHitbox;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask[] groundLayers;
+    [SerializeField] private Cooldown cooldown;
     // Gets other objects' components used and such
 
     public GameObject movingGround;
@@ -20,6 +22,8 @@ public class RogueMovement : MonoBehaviour
     public bool isMobile = true;
     public float lastMoveGroundPosX;
     public float lastMoveGroundPosY;
+    public double dashSensitivity = .3;
+    public float dashDistance = 5f;
     private float horizontal;
     // Used for the horizontal input
     private float speed = 12f;
@@ -28,6 +32,10 @@ public class RogueMovement : MonoBehaviour
     // The POWER (world units per second) of dem legs
     private bool isFacingRight = true;
     // The direction of the character
+    private float lastDirect = 0;
+    private bool m_isAxisInUse = false;
+    private bool dirR = false;
+
     void Update() // Is called once per frame
     {
         if (movingGround)
@@ -44,12 +52,47 @@ public class RogueMovement : MonoBehaviour
             movingGroundSpeed = new Vector2(0, 0);
         }
 
-        if (isMobile) horizontal = Input.GetAxisRaw("Horizontal");
-        else horizontal = 0;
+        if (isMobile)
+        {
+            horizontal = Input.GetAxisRaw("Horizontal");
+
+            if (Input.GetAxisRaw("Horizontal") != 0)
+            {
+                if (!m_isAxisInUse)
+                {
+                    if (Time.time - lastDirect < dashSensitivity && (Input.GetAxisRaw("Horizontal") == 1 ? true : false) == dirR && !cooldown.IsCoolingDown)
+                    {
+                        // DASH
+                        float playerSize = playerHitbox.size.x / 2;
+                        RaycastHit2D hitWall = Physics2D.Raycast(transform.position, Vector2.right * Input.GetAxisRaw("Horizontal"));
+                        Debug.DrawRay(transform.position, Vector2.right * hitWall.distance * Input.GetAxisRaw("Horizontal"), Color.red);
+
+                        transform.position = new Vector3(rogue.transform.position.x + (((hitWall.distance > (dashDistance + playerSize)) ? (dashDistance) : (hitWall.distance - playerSize)) * Input.GetAxisRaw("Horizontal")), rogue.transform.position.y);
+                        cooldown.StartCooldown();
+                    }
+                    else
+                    {
+                        lastDirect = Time.time;
+                        dirR = Input.GetAxisRaw("Horizontal") == 1 ? true : false;
+                    }
+                    m_isAxisInUse = true;
+                }
+            }
+
+            if (Input.GetAxisRaw("Horizontal") == 0)
+            {
+                m_isAxisInUse = false;
+            }
+        }
+        else
+        {
+            horizontal = 0;
+            lastDirect = 0;
+        }
         // Gets the horizontal input from the player which is set in Unity in the [Edit -> Settings -> Input] settings
         for (int i = 0; i < groundLayers.Length; i++)
         {
-            if (Input.GetButtonDown("Jump") && Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayers[i]))
+            if (Input.GetButtonDown("Jump") && Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayers[i]) && isMobile)
             // If the "Jump" button is pressed and the groundCheck object is within anything on the groundLayer layer
             {
                 // Does not change the x velocity, then sets the y velocity to the jumpingPower variable
@@ -59,13 +102,13 @@ public class RogueMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Jump") && playerRigidbody.velocity.y > 0f)
+        if (Input.GetButtonDown("Jump") && playerRigidbody.velocity.y > 0f && isMobile)
         {
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y * 0.5f);
             // Does not change the x velocity, then multiplies the current y velocity by 50%, allowing for longer presses to get higher jumps
         }
 
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) // Upon a change in horizontal direction,
+        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && isMobile) // Upon a change in horizontal direction,
         {
             isFacingRight = !isFacingRight;
             // Sets the facing direction to the other way
@@ -80,7 +123,7 @@ public class RogueMovement : MonoBehaviour
 
     private void FixedUpdate()  // Is called exactly 50 times per second, regardless of framerate
     {
-        if (horizontal != 0)
+        if (horizontal != 0 && isMobile)
         {
             playerRigidbody.velocity = new Vector2((horizontal * speed) + (horizontal > 0 ? Math.Abs(movingGroundSpeed.x) : -Math.Abs(movingGroundSpeed.x)), playerRigidbody.velocity.y);
             transform.SetParent(rogue.transform);

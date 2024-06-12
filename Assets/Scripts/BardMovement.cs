@@ -25,7 +25,7 @@ public class BardMovement : MonoBehaviour
     public List<GameObject> arrowObjects = new List<GameObject>();
 
     // Gets other objects' components used and such
-
+    public bool isMobile = true;
     public GameObject movingGround;
     public Vector2 movingGroundSpeed;
     public string arrowCode = "";
@@ -63,7 +63,7 @@ public class BardMovement : MonoBehaviour
         // Gets the horizontal input from the player which is set in Unity in the [Edit -> Settings -> Input] settings
         for (int i = 0; i < groundLayers.Length; i++)
         {
-            if (Input.GetButtonDown("Jump") && Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayers[i]))
+            if (Input.GetButtonDown("Jump") && Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayers[i]) && isMobile)
             // If the "Jump" button is pressed and the groundCheck object is within anything on the groundLayer layer
             {
                 // Does not change the x velocity, then sets the y velocity to the jumpingPower variable
@@ -73,13 +73,13 @@ public class BardMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Jump") && playerRigidbody.velocity.y > 0f)
+        if (Input.GetButtonDown("Jump") && playerRigidbody.velocity.y > 0f && isMobile)
         {
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y * 0.5f);
             // Does not change the x velocity, then multiplies the current y velocity by 50%, allowing for longer presses to get higher jumps
         }
 
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) // Upon a change in horizontal direction,
+        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && isMobile) // Upon a change in horizontal direction,
         {
             isFacingRight = !isFacingRight;
             // Sets the facing direction to the other way
@@ -91,7 +91,7 @@ public class BardMovement : MonoBehaviour
             // Applies it to the player
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) && !cooldown.IsCoolingDown)
+        if (Input.GetKey(KeyCode.LeftShift) && !cooldown.IsCoolingDown && isMobile)
         {
             if (arrowCode.Length < 10)
             {
@@ -153,7 +153,7 @@ public class BardMovement : MonoBehaviour
         }
         else
         {
-            if (arrowCode != "")
+            if (arrowCode != "" && isMobile)
             { // Such a weird way of doing it, I hate it
                 submittedCode = arrowCode;
                 switch (arrowCode)
@@ -161,21 +161,25 @@ public class BardMovement : MonoBehaviour
                     case "231":
                         {
                             Debug.Log("Rain");
+                            cooldown.StartCooldown();
                             break;
                         }
                     case "234":
                         {
                             Debug.Log("Sun");
+                            cooldown.StartCooldown();
                             break;
                         }
                     case "231432":
                         {
                             Debug.Log("Time");
+                            cooldown.StartCooldown();
                             break;
                         }
                     case "413":
                         {
                             Debug.Log("Entrance");
+                            cooldown.StartCooldown();
                             break;
                         }
                 }
@@ -191,7 +195,7 @@ public class BardMovement : MonoBehaviour
 
     private void FixedUpdate()  // Is called exactly 50 times per second, regardless of framerate
     {
-        if (horizontal != 0)
+        if (horizontal != 0 && isMobile)
         {
             playerRigidbody.velocity = new Vector2((horizontal * speed) + (horizontal > 0 ? Math.Abs(movingGroundSpeed.x) : -Math.Abs(movingGroundSpeed.x)), playerRigidbody.velocity.y);
             transform.SetParent(bard.transform);
