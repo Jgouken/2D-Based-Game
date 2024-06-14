@@ -107,8 +107,11 @@ MonoBehaviour:
   groundLayers:
   - serializedVersion: 2
     m_Bits: 64
+  - serializedVersion: 2
+    m_Bits: 512
   cooldown:
     cooldownTime: 2
+  arrowPrefab: {fileID: 3236065041366865152, guid: 7d7ad36e602da7644bdb84a02967b51c, type: 3}
   movingGround: {fileID: 0}
   movingGroundSpeed: {x: 0, y: 0}
   isMobile: 1
@@ -116,6 +119,8 @@ MonoBehaviour:
   lastMoveGroundPosY: 0
   dashSensitivity: 0.3
   dashDistance: 5
+  speed: 12
+  jumpingPower: 50
 --- !u!50 &8938133045821847539
 Rigidbody2D:
   serializedVersion: 4

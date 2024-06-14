@@ -22,9 +22,9 @@ public class WizardMovement : MonoBehaviour
     public float lastMoveGroundPosY;
     private float horizontal;
     // Used for the horizontal input
-    private float speed = 8f;
+    public float speed = 8f;
     // The speed (world unit per second) that the player travels
-    private float jumpingPower = 40f;
+    public float jumpingPower = 40f;
     // The POWER (world units per second) of dem legs
     private bool isFacingRight = true;
     // The direction of the character

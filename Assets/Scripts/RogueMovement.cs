@@ -14,6 +14,7 @@ public class RogueMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask[] groundLayers;
     [SerializeField] private Cooldown cooldown;
+    [SerializeField] private GameObject arrowPrefab;
     // Gets other objects' components used and such
 
     public GameObject movingGround;
@@ -26,9 +27,9 @@ public class RogueMovement : MonoBehaviour
     public float dashDistance = 5f;
     private float horizontal;
     // Used for the horizontal input
-    private float speed = 12f;
+    public float speed = 12f;
     // The speed (world unit per second) that the player travels
-    private float jumpingPower = 40f;
+    public float jumpingPower = 50f;
     // The POWER (world units per second) of dem legs
     private bool isFacingRight = true;
     // The direction of the character
@@ -82,6 +83,10 @@ public class RogueMovement : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") == 0)
             {
                 m_isAxisInUse = false;
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(0)) {
+                Instantiate(arrowPrefab, transform);
             }
         }
         else
