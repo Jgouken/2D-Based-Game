@@ -29,6 +29,7 @@ public class RogueMovement : MonoBehaviour
     // Used for the horizontal input
     public float speed = 12f;
     // The speed (world unit per second) that the player travels
+    public List<GameObject> arrowCount = new List<GameObject>();
     public float jumpingPower = 50f;
     // The POWER (world units per second) of dem legs
     private bool isFacingRight = true;
@@ -86,7 +87,7 @@ public class RogueMovement : MonoBehaviour
             }
 
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(0)) {
-                Instantiate(arrowPrefab, transform);
+                arrowCount.Add(Instantiate(arrowPrefab, transform));
             }
         }
         else
@@ -126,7 +127,6 @@ public class RogueMovement : MonoBehaviour
         }
 
         if (!movingGround) transform.parent = rogue.transform;
-        Debug.Log(movingGround ? true : false);
     }
 
     private void FixedUpdate()  // Is called exactly 50 times per second, regardless of framerate
