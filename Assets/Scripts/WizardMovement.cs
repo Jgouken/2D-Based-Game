@@ -76,6 +76,8 @@ public class WizardMovement : MonoBehaviour
             transform.localScale = localScale;
             // Applies it to the player
         }
+
+        if (!movingGround) transform.parent = wizard.transform;
     }
 
     private void FixedUpdate()  // Is called exactly 50 times per second, regardless of framerate

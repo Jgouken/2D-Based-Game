@@ -124,6 +124,9 @@ public class RogueMovement : MonoBehaviour
             transform.localScale = localScale;
             // Applies it to the player
         }
+
+        if (!movingGround) transform.parent = rogue.transform;
+        Debug.Log(movingGround ? true : false);
     }
 
     private void FixedUpdate()  // Is called exactly 50 times per second, regardless of framerate

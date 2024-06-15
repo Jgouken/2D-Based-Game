@@ -191,6 +191,8 @@ public class BardMovement : MonoBehaviour
                 arrowObjects = new List<GameObject>();
             }
         }
+
+        if (!movingGround) transform.parent = bard.transform;
     }
 
     private void FixedUpdate()  // Is called exactly 50 times per second, regardless of framerate
