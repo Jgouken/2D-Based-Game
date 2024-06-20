@@ -7,7 +7,7 @@ public class ArrowLogic : MonoBehaviour
 {
     [SerializeField] private LayerMask[] groundLayers;
     [SerializeField] private Transform groundCheck;
-    public float maximumArrows = 10f;
+    private float destroid = 0f;
     private Vector3 screenPos;
     private Vector3 posRelative;
     private float trueAngle;
@@ -49,7 +49,7 @@ public class ArrowLogic : MonoBehaviour
             if (collide.gameObject.layer == LayerMask.NameToLayer("Arrow") && collide.gameObject.GetComponent<Rigidbody2D>().velocity == Vector2.zero)
             {
                 player.GetComponent<RogueMovement>().arrowCount.Remove(collide.gameObject);
-                if (collide.transform.childCount > 1) player.transform.parent = level.transform.Find("rogue");
+                if (collide.transform.childCount > 1) player.transform.parent = level.transform.Find("Rogue");
                 Destroy(collide.gameObject);
             }
         }
@@ -57,25 +57,37 @@ public class ArrowLogic : MonoBehaviour
 
     void Update()
     {
-        try
+        if (destroid != 0f)
         {
-            if (player.GetComponent<RogueMovement>().arrowCount.Count > maximumArrows && player.GetComponent<RogueMovement>().arrowCount.Contains(gameObject))
+            if ((Time.time - destroid) > 3)
             {
-                // I image a fade out then destroy
-                player.GetComponent<RogueMovement>().arrowCount.Remove(gameObject);
-                if (transform.childCount > 1) player.transform.parent = level.transform.Find("rogue");
+                if (transform.childCount > 1) player.transform.parent = level.transform.Find("Rogue");
                 Destroy(gameObject);
             }
-            if (gameObject.GetComponent<Rigidbody2D>().velocity == Vector2.zero) return;
-            trueAngle = (float)Math.Atan2(screenPos.y - player.transform.position.y, screenPos.x - player.transform.position.x);
-            //var tempAngle = new Quaternion();
-            transform.rotation = LookAtTarget(GetComponent<Rigidbody2D>().velocity);
+            return;
         }
-        catch (Exception e)
+        else
         {
-            //Debug.Log(e.Message); Just...shhhh....
-        }
+            try
+            {
+                if (player.GetComponent<RogueMovement>().arrowCount.Count > player.GetComponent<RogueMovement>().maximumArrows && player.GetComponent<RogueMovement>().arrowCount.Contains(gameObject))
+                {
+                    player.GetComponent<RogueMovement>().arrowCount.Remove(gameObject);
+                    gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .25f);
+                    destroid = Time.time;
+                }
 
+                if (gameObject.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
+                {
+                    trueAngle = (float)Math.Atan2(screenPos.y - player.transform.position.y, screenPos.x - player.transform.position.x);
+                    transform.rotation = LookAtTarget(GetComponent<Rigidbody2D>().velocity);
+                }
+            }
+            catch (Exception e)
+            {
+                //Just...shhhh....
+            }
+        }
     }
 
     public static Quaternion LookAtTarget(Vector2 rotation)

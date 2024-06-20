@@ -35,6 +35,7 @@ public class RogueMovement : MonoBehaviour
     private bool isFacingRight = true;
     // The direction of the character
     private float lastDirect = 0;
+    public float maximumArrows = 10f;
     private bool m_isAxisInUse = false;
     private bool dirR = false;
 
