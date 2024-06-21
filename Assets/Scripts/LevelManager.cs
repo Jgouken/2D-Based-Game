@@ -9,7 +9,25 @@ public class LevelManager : MonoBehaviour
     public GameObject bardPrefab;
     public GameObject roguePrefab;
 
-    private GameObject prefb = null;
+    // ROGUE
+    public float maximumArrows = 10f;
+    public List<GameObject> arrowCount = new List<GameObject>();
+
+    // WIZARD
+    public float visionSize = 0f;
+    public float maximumVisionSize; // This value should only be set level-per-level, not manually. If kept unset (0), it will default to 8 times the player's hitbox size.
+    public float visionSpeed;
+    
+    // BARD
+    public GameObject left;
+    public GameObject right;
+    public GameObject down;
+    public GameObject up;
+    public List<GameObject> arrowObjects = new List<GameObject>();
+    public string arrowCode = "";
+    public string submittedCode = "";
+
+    private GameObject prefb;
 
     void Update()
     {

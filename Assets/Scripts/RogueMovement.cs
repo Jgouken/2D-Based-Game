@@ -29,13 +29,12 @@ public class RogueMovement : MonoBehaviour
     // Used for the horizontal input
     public float speed = 12f;
     // The speed (world unit per second) that the player travels
-    public List<GameObject> arrowCount = new List<GameObject>();
     public float jumpingPower = 50f;
     // The POWER (world units per second) of dem legs
     private bool isFacingRight = true;
     // The direction of the character
     private float lastDirect = 0;
-    public float maximumArrows = 10f;
+    // The last input of the direction
     private bool m_isAxisInUse = false;
     private bool dirR = false;
 
@@ -43,7 +42,7 @@ public class RogueMovement : MonoBehaviour
     {
         if (movingGround)
         {
-            //if (lastGroundPos) movingGroundSpeed = new Vector2(Math.Abs(lastGroundPos.position.x - movingGround.transform.position.x), Math.Abs(lastGroundPos.position.y - movingGround.transform.position.y));
+            // if (lastGroundPos) movingGroundSpeed = new Vector2(Math.Abs(lastGroundPos.position.x - movingGround.transform.position.x), Math.Abs(lastGroundPos.position.y - movingGround.transform.position.y));
             if (lastMoveGroundPosX != 0 && lastMoveGroundPosY != 0) movingGroundSpeed = new Vector2(-(lastMoveGroundPosX - movingGround.transform.position.x) / Time.deltaTime, -(lastMoveGroundPosY - movingGround.transform.position.y) / Time.deltaTime);
             lastMoveGroundPosX = movingGround.transform.position.x;
             lastMoveGroundPosY = movingGround.transform.position.y;
@@ -87,8 +86,9 @@ public class RogueMovement : MonoBehaviour
                 m_isAxisInUse = false;
             }
 
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(0)) {
-                arrowCount.Add(Instantiate(arrowPrefab, transform));
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(0))
+            {
+                GameObject.Find("/Level").GetComponent<LevelManager>().arrowCount.Add(Instantiate(arrowPrefab, transform));
             }
         }
         else

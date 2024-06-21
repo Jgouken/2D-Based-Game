@@ -13,7 +13,6 @@ public class MousePosition : MonoBehaviour
     [SerializeField] private GameObject playerCopy;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform telepoint;
-    [SerializeField] private Magivision magivision;
     [SerializeField] private Cooldown cooldown;
     // Gets other objects' components used and such
 
@@ -58,7 +57,7 @@ public class MousePosition : MonoBehaviour
             if (hitGround.collider != null && telepoint.position.y < (telepoint.position.y - hitGround.distance) + (playerHitbox.size.y))
             // If there is ground under the telepoint and your mouse is close enough to the ground
             {
-                if (Vector3.Distance(new Vector3(telepoint.position.x, telepoint.position.y - hitGround.distance), new Vector3(player.transform.position.x, player.transform.position.y + (float)0.743)) <= (magivision.visionSize / 2) - playerHitbox.size.x)
+                if (Vector3.Distance(new Vector3(telepoint.position.x, telepoint.position.y - hitGround.distance), new Vector3(player.transform.position.x, player.transform.position.y + (float)0.743)) <= (GameObject.Find("/Level").GetComponent<LevelManager>().visionSize / 2) - playerHitbox.size.x)
                 // If the telepoint is within the magivision circle
                 {
                     if (hitCieling.collider != null) // If there is cieling above the telepoint

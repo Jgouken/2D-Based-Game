@@ -11,18 +11,19 @@ public class Magivision : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject magivision;
     [HideInInspector] public List<GameObject> magiforms;
-    public float visionSize = 0f;
-    public float maximumVisionSize; // This value should only be set level-per-level, not manually. If kept unset (0), it will default to 8 times the player's hitbox size.
-    public float visionSpeed;
+    public LevelManager levelManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (maximumVisionSize <= 0) maximumVisionSize = player.GetComponent<BoxCollider2D>().size.y * 8;
-        if (visionSpeed <= 0) visionSpeed = .2f;
+        levelManager = GameObject.Find("/Level").GetComponent<LevelManager>();
+
+        if (levelManager.maximumVisionSize <= 0) levelManager.maximumVisionSize = player.GetComponent<BoxCollider2D>().size.y * 8;
+        if (levelManager.visionSpeed <= 0) levelManager.visionSpeed = .2f;
 
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
-        foreach (GameObject go in allObjects) {
+        foreach (GameObject go in allObjects)
+        {
             if (go.layer == 3) magiforms.Add(go);
         }
     }
@@ -30,7 +31,7 @@ public class Magivision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Input.GetKey(KeyCode.LeftShift) && visionSize < player.GetComponent<BoxCollider2D>().size.y)
+        if (!Input.GetKey(KeyCode.LeftShift) && levelManager.visionSize < player.GetComponent<BoxCollider2D>().size.y)
         // Just so the player doesn't seem to hang if standing on a platform
         {
             foreach (GameObject magicPlatform in magiforms)
@@ -38,7 +39,7 @@ public class Magivision : MonoBehaviour
                 magicPlatform.GetComponent<BoxCollider2D>().enabled = false;
             }
         }
-        else if (visionSize >= player.GetComponent<BoxCollider2D>().size.y)
+        else if (levelManager.visionSize >= player.GetComponent<BoxCollider2D>().size.y)
         {
             foreach (GameObject magicPlatform in magiforms)
             {
@@ -49,19 +50,19 @@ public class Magivision : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             // EnableMagivision(true);
-            if (visionSize < maximumVisionSize)
+            if (levelManager.visionSize < levelManager.maximumVisionSize)
             {
-                visionSize += visionSpeed;
-                if (visionSize > maximumVisionSize) visionSize = maximumVisionSize;
-                magivision.transform.localScale = new Vector3(visionSize, visionSize);
+                levelManager.visionSize += levelManager.visionSpeed;
+                if (levelManager.visionSize > levelManager.maximumVisionSize) levelManager.visionSize = levelManager.maximumVisionSize;
+                magivision.transform.localScale = new Vector3(levelManager.visionSize, levelManager.visionSize);
             }
         } // else if (visionSize <= 0) EnableMagivision(false); (Only use if the circle starts actin up, otherwise uneccessary)
 
-        if (visionSize > 0 && !Input.GetKey(KeyCode.LeftShift))
+        if (levelManager.visionSize > 0 && !Input.GetKey(KeyCode.LeftShift))
         {
-            visionSize -= visionSpeed;
-            if (visionSize < 0) visionSize = 0;
-            magivision.transform.localScale = new Vector3(visionSize, visionSize);
+            levelManager.visionSize -= levelManager.visionSpeed;
+            if (levelManager.visionSize < 0) levelManager.visionSize = 0;
+            magivision.transform.localScale = new Vector3(levelManager.visionSize, levelManager.visionSize);
         }
     }
 }

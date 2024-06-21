@@ -15,32 +15,28 @@ public class BardMovement : MonoBehaviour
     [SerializeField] private LayerMask[] groundLayers;
     [SerializeField] private Cooldown cooldown;
 
-    // Arrows
-    public GameObject left;
-    public GameObject right;
-    public GameObject down;
-    public GameObject up;
-    private GameObject currentArrow;
-
-    public List<GameObject> arrowObjects = new List<GameObject>();
-
     // Gets other objects' components used and such
     public bool isMobile = true;
     public GameObject movingGround;
     public Vector2 movingGroundSpeed;
-    public string arrowCode = "";
-    public string submittedCode = "";
     public float lastMoveGroundPosX;
     public float lastMoveGroundPosY;
 
+    private LevelManager levelManager;
     private float horizontal;
     // Used for the horizontal input
+    private GameObject currentArrow;
     public float speed = 8f;
     // The speed (world unit per second) that the player travels
     public float jumpingPower = 40f;
     // The POWER (world units per second) of dem legs
     private bool isFacingRight = true;
     // The direction of the character
+    void Start()
+    {
+        levelManager = GameObject.Find("/Level").GetComponent<LevelManager>();
+    }
+    
     void Update() // Is called once per frame
     {
         if (movingGround)
@@ -93,70 +89,70 @@ public class BardMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) && !cooldown.IsCoolingDown && isMobile)
         {
-            if (arrowCode.Length < 10)
+            if (levelManager.arrowCode.Length < 10)
             {
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
                     // Left
-                    arrowCode = arrowCode + "1";
-                    currentArrow = Instantiate(left, transform);
+                    levelManager.arrowCode = levelManager.arrowCode + "1";
+                    currentArrow = Instantiate(levelManager.left, transform);
                     currentArrow.transform.position = new Vector3(currentArrow.transform.position.x, currentArrow.transform.position.y + 2);
                     currentArrow.transform.localScale = new Vector3(-1, 1, 0);
-                    foreach (var arrow in arrowObjects)
+                    foreach (var arrow in levelManager.arrowObjects)
                     {
                         // GET OUT OF THE WAY, DAYUM
                         arrow.transform.position = new Vector3(arrow.transform.position.x - (isFacingRight == true ? 2 : -2), arrow.transform.position.y);
                     }
-                    arrowObjects.Add(currentArrow);
+                    levelManager.arrowObjects.Add(currentArrow);
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
                     // Right
-                    arrowCode = arrowCode + "4";
-                    currentArrow = Instantiate(right, transform);
+                    levelManager.arrowCode = levelManager.arrowCode + "4";
+                    currentArrow = Instantiate(levelManager.right, transform);
                     currentArrow.transform.position = new Vector3(currentArrow.transform.position.x, currentArrow.transform.position.y + 2);
                     currentArrow.transform.localScale = new Vector3(-1, 1, 0);
-                    foreach (var arrow in arrowObjects)
+                    foreach (var arrow in levelManager.arrowObjects)
                     {
                         // GET OUT OF THE WAY, DAYUM
                         arrow.transform.position = new Vector3(arrow.transform.position.x - (isFacingRight == true ? 2 : -2), arrow.transform.position.y);
                     }
-                    arrowObjects.Add(currentArrow);
+                    levelManager.arrowObjects.Add(currentArrow);
                 }
                 else if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     // Up
-                    arrowCode = arrowCode + "2";
-                    currentArrow = Instantiate(up, transform);
+                    levelManager.arrowCode = levelManager.arrowCode + "2";
+                    currentArrow = Instantiate(levelManager.up, transform);
                     currentArrow.transform.position = new Vector3(currentArrow.transform.position.x, currentArrow.transform.position.y + 2);
-                    foreach (var arrow in arrowObjects)
+                    foreach (var arrow in levelManager.arrowObjects)
                     {
                         // GET OUT OF THE WAY, DAYUM
                         arrow.transform.position = new Vector3(arrow.transform.position.x - (isFacingRight == true ? 2 : -2), arrow.transform.position.y);
                     }
-                    arrowObjects.Add(currentArrow);
+                    levelManager.arrowObjects.Add(currentArrow);
                 }
                 else if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     // Down
-                    arrowCode = arrowCode + "3";
-                    currentArrow = Instantiate(down, transform);
+                    levelManager.arrowCode = levelManager.arrowCode + "3";
+                    currentArrow = Instantiate(levelManager.down, transform);
                     currentArrow.transform.position = new Vector3(currentArrow.transform.position.x, currentArrow.transform.position.y + 2);
-                    foreach (var arrow in arrowObjects)
+                    foreach (var arrow in levelManager.arrowObjects)
                     {
                         // GET OUT OF THE WAY, DAYUM
                         arrow.transform.position = new Vector3(arrow.transform.position.x - (isFacingRight == true ? 2 : -2), arrow.transform.position.y);
                     }
-                    arrowObjects.Add(currentArrow);
+                    levelManager.arrowObjects.Add(currentArrow);
                 }
             }
         }
         else
         {
-            if (arrowCode != "" && isMobile)
+            if (levelManager.arrowCode != "" && isMobile)
             { // Such a weird way of doing it, I hate it
-                submittedCode = arrowCode;
-                switch (arrowCode)
+                levelManager.submittedCode = levelManager.arrowCode;
+                switch (levelManager.arrowCode)
                 {
                     case "231":
                         {
@@ -183,12 +179,12 @@ public class BardMovement : MonoBehaviour
                             break;
                         }
                 }
-                arrowCode = "";
-                foreach (var arrow in arrowObjects)
+                levelManager.arrowCode = "";
+                foreach (var arrow in levelManager.arrowObjects)
                 {
                     Destroy(arrow);
                 }
-                arrowObjects = new List<GameObject>();
+                levelManager.arrowObjects = new List<GameObject>();
             }
         }
 

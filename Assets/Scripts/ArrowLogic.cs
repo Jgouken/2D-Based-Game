@@ -8,16 +8,18 @@ public class ArrowLogic : MonoBehaviour
     [SerializeField] private LayerMask[] groundLayers;
     [SerializeField] private Transform groundCheck;
     private float destroid = 0f;
+    private float trueAngle;
     private Vector3 screenPos;
     private Vector3 posRelative;
-    private float trueAngle;
     private GameObject level;
     private GameObject player;
+    private LevelManager levelManager;
 
     void Start()
     {
         level = GameObject.Find("/Level");
         player = GameObject.Find("Player");
+        levelManager = level.GetComponent<LevelManager>();
 
         screenPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         posRelative = new Vector3(screenPos.x - player.transform.position.x, screenPos.y - player.transform.position.y);
@@ -48,7 +50,7 @@ public class ArrowLogic : MonoBehaviour
 
             if (collide.gameObject.layer == LayerMask.NameToLayer("Arrow") && collide.gameObject.GetComponent<Rigidbody2D>().velocity == Vector2.zero)
             {
-                player.GetComponent<RogueMovement>().arrowCount.Remove(collide.gameObject);
+                levelManager.arrowCount.Remove(collide.gameObject);
                 if (collide.transform.childCount > 1) player.transform.parent = level.transform.Find("Rogue");
                 Destroy(collide.gameObject);
             }
@@ -70,9 +72,9 @@ public class ArrowLogic : MonoBehaviour
         {
             try
             {
-                if (player.GetComponent<RogueMovement>().arrowCount.Count > player.GetComponent<RogueMovement>().maximumArrows && player.GetComponent<RogueMovement>().arrowCount.Contains(gameObject))
+                if (levelManager.arrowCount.Count > levelManager.maximumArrows && levelManager.arrowCount.Contains(gameObject))
                 {
-                    player.GetComponent<RogueMovement>().arrowCount.Remove(gameObject);
+                    levelManager.arrowCount.Remove(gameObject);
                     gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .25f);
                     destroid = Time.time;
                 }
