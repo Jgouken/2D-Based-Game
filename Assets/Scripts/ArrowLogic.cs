@@ -51,7 +51,6 @@ public class ArrowLogic : MonoBehaviour
             if (collide.gameObject.layer == LayerMask.NameToLayer("Arrow") && collide.gameObject.GetComponent<Rigidbody2D>().velocity == Vector2.zero)
             {
                 levelManager.arrowCount.Remove(collide.gameObject);
-                if (collide.transform.childCount > 1) player.transform.parent = level.transform.Find("Rogue");
                 Destroy(collide.gameObject);
             }
         }
@@ -61,11 +60,7 @@ public class ArrowLogic : MonoBehaviour
     {
         if (destroid != 0f)
         {
-            if ((Time.time - destroid) > 3)
-            {
-                if (transform.childCount > 1) player.transform.parent = level.transform.Find("Rogue");
-                Destroy(gameObject);
-            }
+            if ((Time.time - destroid) > 3) Destroy(gameObject);
             return;
         }
         else
@@ -74,20 +69,27 @@ public class ArrowLogic : MonoBehaviour
             {
                 if (levelManager.arrowCount.Count > levelManager.maximumArrows && levelManager.arrowCount.Contains(gameObject))
                 {
+                    // Delete arrow if it is at a useless arrow?
+                    // Have arrows ignore the playerunless they're a Rogue?
+
                     levelManager.arrowCount.Remove(gameObject);
                     gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .25f);
                     destroid = Time.time;
                 }
-
+                
                 if (gameObject.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
                 {
                     trueAngle = (float)Math.Atan2(screenPos.y - player.transform.position.y, screenPos.x - player.transform.position.x);
                     transform.rotation = LookAtTarget(GetComponent<Rigidbody2D>().velocity);
                 }
+                else
+                {
+                    if (gameObject.layer != LayerMask.NameToLayer("Arrow")) gameObject.layer = LayerMask.NameToLayer("Arrow");
+                }
             }
             catch (Exception e)
             {
-                //Just...shhhh....
+                Debug.LogException(e);
             }
         }
     }
