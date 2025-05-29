@@ -105,13 +105,13 @@ public class RogueMovement : MonoBehaviour
                 // Does not change the x velocity, then sets the y velocity to the jumpingPower variable
                 i = groundLayers.Length;
                 //playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpingPower);
-                playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x + movingGroundSpeed.x, jumpingPower + movingGroundSpeed.y);
+                playerRigidbody.linearVelocity = new Vector2(playerRigidbody.linearVelocity.x + movingGroundSpeed.x, jumpingPower + movingGroundSpeed.y);
             }
         }
 
-        if (Input.GetButtonDown("Jump") && playerRigidbody.velocity.y > 0f && isMobile)
+        if (Input.GetButtonDown("Jump") && playerRigidbody.linearVelocity.y > 0f && isMobile)
         {
-            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.y * 0.5f);
+            playerRigidbody.linearVelocity = new Vector2(playerRigidbody.linearVelocity.x, playerRigidbody.linearVelocity.y * 0.5f);
             // Does not change the x velocity, then multiplies the current y velocity by 50%, allowing for longer presses to get higher jumps
         }
 
@@ -134,13 +134,13 @@ public class RogueMovement : MonoBehaviour
     {
         if (horizontal != 0 && isMobile)
         {
-            playerRigidbody.velocity = new Vector2((horizontal * speed) + (horizontal > 0 ? Math.Abs(movingGroundSpeed.x) : -Math.Abs(movingGroundSpeed.x)), playerRigidbody.velocity.y);
+            playerRigidbody.linearVelocity = new Vector2((horizontal * speed) + (horizontal > 0 ? Math.Abs(movingGroundSpeed.x) : -Math.Abs(movingGroundSpeed.x)), playerRigidbody.linearVelocity.y);
             transform.SetParent(rogue.transform);
         }
         else
         {
             if (movingGround) if (movingGround.tag == "Moving Platform") transform.SetParent(movingGround.transform);
-            playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
+            playerRigidbody.linearVelocity = new Vector2(0, playerRigidbody.linearVelocity.y);
         }
     }
 

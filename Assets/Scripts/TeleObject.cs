@@ -44,12 +44,12 @@ public class TeleObject : MonoBehaviour
         if (grabbed)
         {
             mouseSpeed = (mousePos - lastMousePos) / Time.deltaTime;
-            objectRigidbody.velocity = new Vector3(0, 0);
+            objectRigidbody.linearVelocity = new Vector3(0, 0);
             lastMousePos = mousePos;
         }
-        if (!Input.GetMouseButton(0) || Input.GetKey(KeyCode.LeftShift)) { grabbed = false; objectRigidbody.velocity = mouseSpeed; }
+        if (!Input.GetMouseButton(0) || Input.GetKey(KeyCode.LeftShift)) { grabbed = false; objectRigidbody.linearVelocity = mouseSpeed; }
         if (Input.GetMouseButton(0) && grabbed && !Input.GetKey(KeyCode.LeftShift)) transform.position = new Vector3(mousePos.x + positionOffset.x, mousePos.y + positionOffset.y);
-        if (!grabbed) objectRigidbody.velocity = new Vector2(objectRigidbody.velocity.x, objectRigidbody.velocity.y * 0.5f);
+        if (!grabbed) objectRigidbody.linearVelocity = new Vector2(objectRigidbody.linearVelocity.x, objectRigidbody.linearVelocity.y * 0.5f);
     }
 
     void LateUpdate()

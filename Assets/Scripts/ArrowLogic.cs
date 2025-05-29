@@ -34,7 +34,7 @@ public class ArrowLogic : MonoBehaviour
 
         transform.eulerAngles = new Vector3(0, 0, trueAngle);
 
-        GetComponent<Rigidbody2D>().velocity = new Vector2(posRelative.x, posRelative.y);
+        GetComponent<Rigidbody2D>().linearVelocity = new Vector2(posRelative.x, posRelative.y);
     }
 
     void OnCollisionEnter2D(Collision2D collide)
@@ -48,7 +48,7 @@ public class ArrowLogic : MonoBehaviour
                 return;
             }
 
-            if (collide.gameObject.layer == LayerMask.NameToLayer("Arrow") && collide.gameObject.GetComponent<Rigidbody2D>().velocity == Vector2.zero)
+            if (collide.gameObject.layer == LayerMask.NameToLayer("Arrow") && collide.gameObject.GetComponent<Rigidbody2D>().linearVelocity == Vector2.zero)
             {
                 levelManager.arrowCount.Remove(collide.gameObject);
                 Destroy(collide.gameObject);
@@ -77,10 +77,10 @@ public class ArrowLogic : MonoBehaviour
                     destroid = Time.time;
                 }
                 
-                if (gameObject.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
+                if (gameObject.GetComponent<Rigidbody2D>().linearVelocity != Vector2.zero)
                 {
                     trueAngle = (float)Math.Atan2(screenPos.y - player.transform.position.y, screenPos.x - player.transform.position.x);
-                    transform.rotation = LookAtTarget(GetComponent<Rigidbody2D>().velocity);
+                    transform.rotation = LookAtTarget(GetComponent<Rigidbody2D>().linearVelocity);
                 }
                 else
                 {
