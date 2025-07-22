@@ -524,9 +524,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13dbfa48a9ac934e9a72823263155c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wizardSelect: {fileID: 1336880369}
-  bardSelect: {fileID: 2054727485}
-  rogueSelect: {fileID: 103175469}
+  wizardSelect: {fileID: 1336880368}
+  bardSelect: {fileID: 2054727484}
+  rogueSelect: {fileID: 103175468}
   mainTarget: {fileID: 1918977114}
   mainTargetName: {fileID: 1487026872}
   mainTargetDescription: {fileID: 141481705}
