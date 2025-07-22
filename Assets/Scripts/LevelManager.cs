@@ -10,7 +10,6 @@ public class LevelManager : MonoBehaviour
     public GameObject bardPrefab;
     public GameObject roguePrefab;
     public Transform startPosition;
-    public float selectedChar = Persist.selectedCharacter; // 0: Wizard, 1: Rogue, 2: Bard
 
     // ROGUE
     public float maximumArrows = 10f;
@@ -35,7 +34,7 @@ public class LevelManager : MonoBehaviour
     {
         if (!playerChar)
         {
-            switch (selectedChar)
+            switch (Persist.selectedCharacter)  // 0: Wizard, 1: Rogue, 2: Bard, default 0
             {
                 case 0: // Wizard
                     playerChar = Instantiate(wizardPrefab, startPosition.position, Quaternion.identity);
@@ -46,6 +45,9 @@ public class LevelManager : MonoBehaviour
                 case 2: // Bard
                     playerChar = Instantiate(bardPrefab, startPosition.position, Quaternion.identity);
                     break;
+                default: // Default to Wizard in case idk someone does something weird
+                    playerChar = Instantiate(wizardPrefab, startPosition.position, Quaternion.identity);
+                    break;
             }
         }
 
@@ -53,41 +55,41 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-    //     if (Input.GetKeyDown(KeyCode.Q))
-    //     {
-    //         Debug.Log("Changed Character!");
-    //         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
-    //         foreach (GameObject charact in allObjects)
-    //         {
-    //             if (charact.name == "Player")
-    //             {
-    //                 if (charact.transform.parent.gameObject.name.StartsWith("Bard"))
-    //                 {
-    //                     prefb = Instantiate(wizardPrefab, charact.transform.parent.position, Quaternion.identity);
-    //                 }
-    //                 else if (charact.transform.parent.gameObject.name.StartsWith("Wizard"))
-    //                 {
-    //                     prefb = Instantiate(roguePrefab, charact.transform.parent.position, Quaternion.identity);
-    //                 }
-    //                 else if (charact.transform.parent.gameObject.name.StartsWith("Rogue"))
-    //                 {
-    //                     prefb = Instantiate(bardPrefab, charact.transform.parent.position, Quaternion.identity);
-    //                 }
+        //     if (Input.GetKeyDown(KeyCode.Q))
+        //     {
+        //         Debug.Log("Changed Character!");
+        //         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+        //         foreach (GameObject charact in allObjects)
+        //         {
+        //             if (charact.name == "Player")
+        //             {
+        //                 if (charact.transform.parent.gameObject.name.StartsWith("Bard"))
+        //                 {
+        //                     prefb = Instantiate(wizardPrefab, charact.transform.parent.position, Quaternion.identity);
+        //                 }
+        //                 else if (charact.transform.parent.gameObject.name.StartsWith("Wizard"))
+        //                 {
+        //                     prefb = Instantiate(roguePrefab, charact.transform.parent.position, Quaternion.identity);
+        //                 }
+        //                 else if (charact.transform.parent.gameObject.name.StartsWith("Rogue"))
+        //                 {
+        //                     prefb = Instantiate(bardPrefab, charact.transform.parent.position, Quaternion.identity);
+        //                 }
 
-    //                 foreach (GameObject cam in GameObject.FindGameObjectsWithTag("Camera"))
-    //                 {
-    //                     if (cam.GetComponent<GrabPlayer>() != null)
-    //                     {
-    //                         cam.GetComponent<GrabPlayer>().player = prefb.transform.GetChild(0).gameObject;
-    //                         cam.GetComponent<CinemachineVirtualCamera>().Follow = prefb.transform.GetChild(0).gameObject.transform;
-    //                     }
-    //                 }
-    //                 Destroy(charact.transform.parent.gameObject);
-    //             }
-    //         }
-    //     }
-    
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        //                 foreach (GameObject cam in GameObject.FindGameObjectsWithTag("Camera"))
+        //                 {
+        //                     if (cam.GetComponent<GrabPlayer>() != null)
+        //                     {
+        //                         cam.GetComponent<GrabPlayer>().player = prefb.transform.GetChild(0).gameObject;
+        //                         cam.GetComponent<CinemachineVirtualCamera>().Follow = prefb.transform.GetChild(0).gameObject.transform;
+        //                     }
+        //                 }
+        //                 Destroy(charact.transform.parent.gameObject);
+        //             }
+        //         }
+        //     }
+
+        if (Input.GetKeyDown(KeyCode.Backspace)) // Temp game dev stuff, remove later
         {
             SceneManager.LoadScene("StartSelect");
         }
