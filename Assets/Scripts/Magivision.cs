@@ -21,7 +21,7 @@ public class Magivision : MonoBehaviour
         if (levelManager.maximumVisionSize <= 0) levelManager.maximumVisionSize = player.GetComponent<BoxCollider2D>().size.y * 8;
         if (levelManager.visionSpeed <= 0) levelManager.visionSpeed = .2f;
 
-        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+        GameObject[] allObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
         foreach (GameObject go in allObjects)
         {
             if (go.layer == 3) magiforms.Add(go);
