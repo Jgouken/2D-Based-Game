@@ -156,6 +156,13 @@ public class RogueMovement : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         movingGround = null;
-        transform.SetParent(rogue.transform);
+        try
+        {
+            transform.SetParent(rogue.transform);
+        }
+        catch
+        {
+            // Usually because we are actively destroying the rogue object, so we'll just ignore its complaints
+        }
     }
 }

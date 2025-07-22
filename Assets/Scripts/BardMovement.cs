@@ -32,11 +32,13 @@ public class BardMovement : MonoBehaviour
     // The POWER (world units per second) of dem legs
     private bool isFacingRight = true;
     // The direction of the character
+
+    private GameObject Canvas => GameObject.Find("Canvas");
     void Start()
     {
         levelManager = GameObject.Find("/Level").GetComponent<LevelManager>();
     }
-    
+
     void Update() // Is called once per frame
     {
         if (movingGround)
@@ -89,61 +91,53 @@ public class BardMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) && !cooldown.IsCoolingDown && isMobile)
         {
-            if (levelManager.arrowCode.Length < 10)
+            horizontal = 0;
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
             {
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                if (levelManager.arrowCode.Length < 10)
                 {
-                    // Left
-                    levelManager.arrowCode = levelManager.arrowCode + "1";
-                    currentArrow = Instantiate(levelManager.left, transform);
-                    currentArrow.transform.position = new Vector3(currentArrow.transform.position.x, currentArrow.transform.position.y + 2);
-                    currentArrow.transform.localScale = new Vector3(-1, 1, 0);
-                    foreach (var arrow in levelManager.arrowObjects)
+                    if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {
-                        // GET OUT OF THE WAY, DAYUM
-                        arrow.transform.position = new Vector3(arrow.transform.position.x - (isFacingRight == true ? 2 : -2), arrow.transform.position.y);
+                        // Left
+                        levelManager.arrowCode += "1";
+                        currentArrow = Instantiate(levelManager.left, Canvas.transform);
+
                     }
+                    else if (Input.GetKeyDown(KeyCode.RightArrow))
+                    {
+                        // Right
+                        levelManager.arrowCode += "4";
+                        currentArrow = Instantiate(levelManager.right, Canvas.transform);
+
+                    }
+                    else if (Input.GetKeyDown(KeyCode.UpArrow))
+                    {
+                        // Up
+                        levelManager.arrowCode += "2";
+                        currentArrow = Instantiate(levelManager.up, Canvas.transform);
+
+                    }
+                    else if (Input.GetKeyDown(KeyCode.DownArrow))
+                    {
+                        // Down
+                        levelManager.arrowCode += "3";
+                        currentArrow = Instantiate(levelManager.down, Canvas.transform);
+                    }
+
+                    float totalWidth = levelManager.arrowObjects.Count * 100f;
+                    float startX = Canvas.transform.position.x - totalWidth / 2f;
+                    for (int idx = 0; idx < levelManager.arrowObjects.Count; idx++)
+                    {
+                        var arrow = levelManager.arrowObjects[idx];
+                        arrow.transform.position = new Vector3(startX + idx * 100f, arrow.transform.position.y);
+                    }
+                    // Also position the newly added arrow
+                    currentArrow.transform.position = new Vector3(startX + levelManager.arrowObjects.Count * 100f, 1000);
                     levelManager.arrowObjects.Add(currentArrow);
                 }
-                else if (Input.GetKeyDown(KeyCode.RightArrow))
+                else
                 {
-                    // Right
-                    levelManager.arrowCode = levelManager.arrowCode + "4";
-                    currentArrow = Instantiate(levelManager.right, transform);
-                    currentArrow.transform.position = new Vector3(currentArrow.transform.position.x, currentArrow.transform.position.y + 2);
-                    currentArrow.transform.localScale = new Vector3(-1, 1, 0);
-                    foreach (var arrow in levelManager.arrowObjects)
-                    {
-                        // GET OUT OF THE WAY, DAYUM
-                        arrow.transform.position = new Vector3(arrow.transform.position.x - (isFacingRight == true ? 2 : -2), arrow.transform.position.y);
-                    }
-                    levelManager.arrowObjects.Add(currentArrow);
-                }
-                else if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    // Up
-                    levelManager.arrowCode = levelManager.arrowCode + "2";
-                    currentArrow = Instantiate(levelManager.up, transform);
-                    currentArrow.transform.position = new Vector3(currentArrow.transform.position.x, currentArrow.transform.position.y + 2);
-                    foreach (var arrow in levelManager.arrowObjects)
-                    {
-                        // GET OUT OF THE WAY, DAYUM
-                        arrow.transform.position = new Vector3(arrow.transform.position.x - (isFacingRight == true ? 2 : -2), arrow.transform.position.y);
-                    }
-                    levelManager.arrowObjects.Add(currentArrow);
-                }
-                else if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    // Down
-                    levelManager.arrowCode = levelManager.arrowCode + "3";
-                    currentArrow = Instantiate(levelManager.down, transform);
-                    currentArrow.transform.position = new Vector3(currentArrow.transform.position.x, currentArrow.transform.position.y + 2);
-                    foreach (var arrow in levelManager.arrowObjects)
-                    {
-                        // GET OUT OF THE WAY, DAYUM
-                        arrow.transform.position = new Vector3(arrow.transform.position.x - (isFacingRight == true ? 2 : -2), arrow.transform.position.y);
-                    }
-                    levelManager.arrowObjects.Add(currentArrow);
+                    // Shake the arrows to indicate that the maximum has been reached
                 }
             }
         }
@@ -154,25 +148,25 @@ public class BardMovement : MonoBehaviour
                 levelManager.submittedCode = levelManager.arrowCode;
                 switch (levelManager.arrowCode)
                 {
-                    case "231":
+                    case "231": // ↑ ↓ ←
                         {
                             Debug.Log("Rain");
                             cooldown.StartCooldown();
                             break;
                         }
-                    case "234":
+                    case "234": // ↑ ↓ →
                         {
                             Debug.Log("Sun");
                             cooldown.StartCooldown();
                             break;
                         }
-                    case "231432":
+                    case "231432": // ↑ ↓ ← → ↓ ↑
                         {
                             Debug.Log("Time");
                             cooldown.StartCooldown();
                             break;
                         }
-                    case "413":
+                    case "413": // → ← ↓
                         {
                             Debug.Log("Entrance");
                             cooldown.StartCooldown();

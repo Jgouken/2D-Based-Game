@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     public GameObject bardPrefab;
     public GameObject roguePrefab;
     public Transform startPosition;
-    private int selectedChar = Persist.selectedCharacter; // 0: Wizard, 1: Rogue, 2: Bard
+    public float selectedChar = Persist.selectedCharacter; // 0: Wizard, 1: Rogue, 2: Bard
 
     // ROGUE
     public float maximumArrows = 10f;
@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
     public GameObject right;
     public GameObject down;
     public GameObject up;
-    public GameObject playerChar;
+    private GameObject playerChar;
     public List<GameObject> arrowObjects = new List<GameObject>();
     public string arrowCode = "";
     public string submittedCode = "";
